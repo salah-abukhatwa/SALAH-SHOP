@@ -1,0 +1,50 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+.nav h1 {
+  font-size: 40px;
+  color: blueviolet;
+  margin: 0;
+}
+.nav-search {
+  display: flex;
+  flex: 1;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 1%;
+}
+input {
+  flex: 1;
+  color: blueviolet;
+  border: 1px solid blueviolet;
+  height: 35px;
+  border-right: none;
+}
+
+button {
+  color: blueviolet;
+  border: 1px solid blueviolet;
+  height: 39px;
+}
+ul {
+  display: inline-flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ul li {
+  padding-left: 15px;
+  padding-top: 15px;
+  text-decoration: none;
+}
+ul li a {
+  text-decoration: none;
+  color: blueviolet;
+}
+ul li a:hover {
+  color: #000;
+}
+ul li a.active {
+  color: #533a53;
+}
