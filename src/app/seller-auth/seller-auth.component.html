@@ -1,5 +1,5 @@
 <div class="seller-auth">
-  <div class="sign-up">
+  <div *ngIf="!showLogin" class="sign-up">
     <h1>Seller Sign Up</h1>
     <form
       #sellerSignUp="ngForm"
@@ -17,6 +17,14 @@
         ngModel
       />
       <input
+        type="email"
+        class="form-input"
+        placeholder="Enter Email"
+        name="email"
+        required
+        ngModel
+      />
+      <input
         type="password"
         class="form-input"
         placeholder="Enter Password"
@@ -24,14 +32,48 @@
         required
         ngModel
       />
+
+      <button type="submit" class="form-button">Sign Up</button>
+      <p style="cursor: pointer" class="auth-toogle-link" (click)="openLogin()">
+        Already have an account? Login
+      </p>
+    </form>
+  </div>
+  <div *ngIf="showLogin" class="login">
+    <h1>Seller Login</h1>
+    <form
+      #sellerLogin="ngForm"
+      (ngSubmit)="login(sellerLogin.value)"
+      class="common-form"
+      method="POST"
+      action="#"
+    >
       <input
         type="email"
         class="form-input"
         placeholder="Enter Email"
         name="email"
         required
+        ngModel
       />
-      <button type="submit" class="form-button">Sign Up</button>
+      <input
+        type="password"
+        class="form-input"
+        placeholder="Enter Password"
+        name="password"
+        required
+        ngModel
+      />
+
+      <button type="submit" class="form-button">Login</button>
+      <p
+        style="cursor: pointer"
+        class="auth-toogle-link"
+        st
+        (click)="openSignUp()"
+      >
+        Don't have an account? Sign Up
+      </p>
     </form>
   </div>
 </div>
