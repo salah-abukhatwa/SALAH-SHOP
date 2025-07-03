@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SellerService } from '../services/seller.service';
-import { login, signUp } from '../auth-data.model';
+import { login, signUp } from '../model/auth-data.model';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 

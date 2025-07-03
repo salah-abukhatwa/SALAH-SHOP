@@ -6,5 +6,16 @@
       "email": "momo@gmail.com",
       "password": "1234"
     }
+  ],
+  "products": [
+    {
+      "id": "bca1",
+      "name": "Iphone 15 pro max",
+      "price": "1500",
+      "color": "titanium",
+      "category": "mobile",
+      "image": "https://cdn.akakce.com/z/apple/iphone-15-pro-max-256-gb-naturel-titanyum.jpg",
+      "description": " iPhone 15 Pro Max, RAM Capacity: 8 GB, Internal Memory: 256 GB, Screen Size: 6.7 inches, Battery Capacity: 4422 mAh, Release Year: 2023"
+    }
   ]
 }
