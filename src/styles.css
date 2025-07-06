@@ -26,3 +26,7 @@ body {
   color: blueviolet;
   cursor: pointer;
 }
+
+.message-p {
+  color: green;
+}
