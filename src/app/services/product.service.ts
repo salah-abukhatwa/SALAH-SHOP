@@ -24,4 +24,12 @@ export class ProductService {
     // Logic to delete a product
     return this.http.delete(`http://localhost:3000/products/${id}`);
   }
+
+  getProduct(id: string): Observable<Product> {
+    return this.http.get<Product>(`http://localhost:3000/products/${id}`);
+  }
+  updateProduct(id: string, data: Product): Observable<Object> {
+    // Logic to update a product
+    return this.http.put(`http://localhost:3000/products/${id}`, data);
+  }
 }
