@@ -1,6 +1,7 @@
 nav {
   display: flex;
   justify-content: space-between;
+  padding-bottom: 10px;
 }
 .nav h1,
 .nav h1 a {
@@ -26,7 +27,7 @@ input {
 button {
   color: blueviolet;
   border: 1px solid blueviolet;
-  height: 39px;
+  height: 35px;
 }
 ul {
   display: inline-flex;
@@ -49,4 +50,21 @@ ul li a:hover {
 }
 ul li a.active {
   color: #533a53;
+}
+.search-results {
+  position: absolute;
+  top: 40px;
+  z-index: 10;
+  display: list-item !important;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  width: 300px;
+}
+.suggested-search li {
+  padding: 5px;
+  border: 1px solid #ddd;
+}
+.suggested-search li a {
+  cursor: pointer;
+  color: blueviolet;
 }

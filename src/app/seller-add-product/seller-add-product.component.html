@@ -3,7 +3,7 @@
   <p class="message-p">{{ addProductMessage }}</p>
   <form
     #addProduct="ngForm"
-    (ngSubmit)="submit(addProduct.value)"
+    (ngSubmit)="submit(addProduct.value, addProduct)"
     class="common-form"
   >
     <input

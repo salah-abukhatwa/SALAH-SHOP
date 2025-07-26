@@ -32,4 +32,17 @@ export class ProductService {
     // Logic to update a product
     return this.http.put(`http://localhost:3000/products/${id}`, data);
   }
+
+  popularProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>('http://localhost:3000/products?_limit=3');
+  }
+  trendyProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>('http://localhost:3000/products?_limit=5');
+  }
+
+  searchProducts(query: string): Observable<Product[]> {
+    return this.http.get<Product[]>(
+      `http://localhost:3000/products?q=${query}`
+    );
+  }
 }

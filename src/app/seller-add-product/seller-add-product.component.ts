@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { ProductService } from '../services/product.service';
 import { Product } from '../model/product.model';
 
@@ -15,16 +15,18 @@ export class SellerAddProductComponent {
 
   constructor(private productService: ProductService) {}
 
-  submit(data: Product) {
+  submit(data: Product, form: NgForm) {
     console.log('Product data submitted:', data);
     this.productService.addProduct(data).subscribe((result) => {
       console.log('Product added successfully:', result);
       if (result) {
         this.addProductMessage = 'Product added successfully!';
+        form.reset();
+
+        setTimeout(() => {
+          this.addProductMessage = '';
+        }, 3000);
       }
     });
-    setTimeout(() => {
-      this.addProductMessage = '';
-    }, 3000);
   }
 }
