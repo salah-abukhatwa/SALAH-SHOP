@@ -53,5 +53,13 @@
       "description": "Nostalgia Retro Microwave for Countertop 0.7 cu ft Vintage Microwave, Pink",
       "image": "https://i5.walmartimages.com/seo/Nostalgia-Retro-0-7-Cu-ft-700-Watt-Countertop-Microwave-Oven-Pink_1d9af349-b9c2-4900-b095-087aa8a30eea.4782a8494754091b87f9672ed65826e1.jpeg?odnHeight=117&odnWidth=117&odnBg=FFFFFF"
     }
+  ],
+  "users": [
+    {
+      "name": "salah",
+      "email": "salah@gmail.com",
+      "password": "1234",
+      "id": 1
+    }
   ]
 }

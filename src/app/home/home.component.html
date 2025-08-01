@@ -6,12 +6,12 @@
     ngbSlide
   >
     <div class="picsum-img-wrapper">
-      <img
-        class="product-image"
-        [src]="product.image"
-        alt="{{ product.name }}"
-      />
-      <a routerLink="/details/{{ product.id }}"></a>
+      <a routerLink="/details/{{ product.id }}">
+        <img
+          class="product-image"
+          [src]="product.image"
+          alt="{{ product.name }}"
+      /></a>
     </div>
     <div class="carousel-caption">
       <h3>{{ product.name }}</h3>

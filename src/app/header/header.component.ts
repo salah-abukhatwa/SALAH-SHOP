@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   OnInit,
+  Pipe,
   ViewChild,
   viewChild,
 } from '@angular/core';
@@ -21,6 +22,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 export class HeaderComponent implements OnInit {
   menuType: string = 'default';
   sellerName: string = '';
+  userName: string = '';
   searchResult: Product[] = [];
   @ViewChild('searchInput') searchInputRef!: ElementRef;
   constructor(private router: Router, private productService: ProductService) {}
@@ -32,7 +34,14 @@ export class HeaderComponent implements OnInit {
           let sellerStore = localStorage.getItem('seller');
           let sellerData = sellerStore && JSON.parse(sellerStore)[0];
           this.sellerName = sellerData ? sellerData.name : '';
+          console.log(this.sellerName);
           this.menuType = 'seller';
+        } else if (localStorage.getItem('user')) {
+          let userStore = localStorage.getItem('user');
+          let userData = userStore && JSON.parse(userStore);
+          this.userName = userData ? userData.name : '';
+          console.log(this.userName);
+          this.menuType = 'user';
         } else {
           this.menuType = 'default';
         }
@@ -42,6 +51,11 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('seller');
+    this.router.navigate(['/']);
+    this.menuType = 'default';
+  }
+  userLogout() {
+    localStorage.removeItem('user');
     this.router.navigate(['/']);
     this.menuType = 'default';
   }

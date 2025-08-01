@@ -11,8 +11,11 @@
       Search
     </button>
     <ul class="search-results" *ngIf="searchResult">
-      <li *ngFor="let product of searchResult">
-        <a routerLink="search/{{ product.id }}">{{ product.name }}</a>
+      <li
+        *ngFor="let product of searchResult"
+        (click)="searchResult = []; searchInputRef.nativeElement.value = ''"
+      >
+        <a routerLink="/details/{{ product.id }}">{{ product.name }}</a>
       </li>
     </ul>
   </div>
@@ -21,7 +24,18 @@
       <ul>
         <li><a routerLink="seller-auth">Seller</a></li>
         <li><a routerLink="">Home</a></li>
-        <li><a href="#">Login</a></li>
+        <li><a routerLink="user-auth">Login/sign-up</a></li>
+        <li><a href="#">Cart(0)</a></li>
+      </ul>
+    </ng-container>
+    <ng-container *ngSwitchCase="'user'">
+      <ul>
+        <li><a routerLink="seller-auth">Seller</a></li>
+        <li><a routerLink="">Home</a></li>
+        <li>
+          <a>{{ userName }}</a>
+        </li>
+        <li><a (click)="userLogout()">Logout</a></li>
         <li><a href="#">Cart(0)</a></li>
       </ul>
     </ng-container>
@@ -32,7 +46,7 @@
         <li><a routerLink="seller-home">List</a></li>
         <li><a (click)="logout()">Logout</a></li>
         <li>
-          <a>{{ sellerName }}</a>
+          <a>{{ sellerName | titlecase }}</a>
         </li>
       </ul>
     </ng-container>
