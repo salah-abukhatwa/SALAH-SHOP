@@ -11,7 +11,6 @@ body {
   width: 300px;
   margin: auto;
 }
-
 .form-input {
   height: 35px;
   margin-bottom: 20px;
@@ -19,20 +18,39 @@ body {
   padding-left: 15px;
   color: blueviolet;
 }
-
 .form-button {
   height: 35px;
   border: 1px solid blueviolet;
   color: blueviolet;
   cursor: pointer;
 }
+.error-p {
+  color: red;
+}
 
 .message-p {
   color: green;
+  text-align: center;
 }
 
+.carousel-caption {
+  background-color: #0000007d;
+  border-radius: 10px;
+}
 .carousel-control-next-icon,
 .carousel-control-prev-icon {
   background-color: black;
   border-radius: 5px;
+}
+
+.invalid-input {
+  color: red;
+  font-size: 12px;
+  margin-top: -20px;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+.max-width {
+  width: 100%;
 }

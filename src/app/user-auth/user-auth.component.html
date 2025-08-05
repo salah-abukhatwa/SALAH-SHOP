@@ -5,28 +5,40 @@
       #userSignUp="ngForm"
       class="common-form"
       (ngSubmit)="signUp(userSignUp.value)"
+      method="POST"
+      action="#"
     >
       <input
         type="text"
         class="form-input"
         name="name"
         placeholder="Enter User Name"
+        required
+        #name="ngModel"
+        minlength="2"
+        maxlength="20"
         ngModel
       />
       <input
-        type="text"
+        type="email"
         class="form-input"
         name="email"
         placeholder="Enter User Email"
+        required
         ngModel
+        #email="ngModel"
       /><input
         type="password"
         class="form-input"
         name="password"
         placeholder="Enter User Password"
+        required
+        #password="ngModel"
+        minlength="2"
+        maxlength="20"
         ngModel
       />
-      <button class="form-button">Sign Up</button>
+      <button type="submit" class="form-button">Sign Up</button>
       <p>Already Have Account ? <a (click)="openLogin()">Click Here</a></p>
     </form>
   </div>
@@ -36,10 +48,12 @@
       #userLogin="ngForm"
       class="common-form"
       (ngSubmit)="login(userLogin.value)"
+      method="POST"
+      action="#"
     >
       <p class="error-p">{{ authError }}</p>
       <input
-        type="text"
+        type="email"
         class="form-input"
         name="email"
         placeholder="Enter User Email"
@@ -69,7 +83,9 @@
           >Please enter valid input</span
         >
       </p>
-      <button [disabled]="userLogin.invalid" class="form-button">Login</button>
+      <button type="submit" [disabled]="userLogin.invalid" class="form-button">
+        Login
+      </button>
       <p>Want to Create Account ? <a (click)="openSignUp()">Click Here</a></p>
     </form>
   </div>

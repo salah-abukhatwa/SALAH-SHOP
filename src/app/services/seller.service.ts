@@ -13,7 +13,6 @@ export class SellerService {
   constructor(private http: HttpClient, private router: Router) {}
 
   userSignUp(data: signUp) {
-    // Example usage of imported HttpClient
     return this.http
       .post('http://localhost:3000/seller', data, { observe: 'response' })
       .subscribe((result) => {
@@ -21,7 +20,8 @@ export class SellerService {
         if (result) {
           alert('Sign Up Successful');
           this.isSellerLoggedIn.next(true);
-          localStorage.setItem('seller', JSON.stringify(result.body));
+          localStorage.setItem('seller', JSON.stringify([result.body]));
+
           this.router.navigate(['/seller-home']);
         } else {
           alert('Sign Up Failed');

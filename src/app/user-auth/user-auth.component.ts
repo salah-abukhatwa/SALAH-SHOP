@@ -23,7 +23,16 @@ export class UserAuthComponent implements OnInit {
     this.userServices.userSignUp(data);
   }
 
-  login(data: login) {}
+  login(data: login) {
+    this.userServices.userLogin(data);
+    this.userServices.isLoginError.subscribe((isError) => {
+      if (isError) {
+        this.authError = 'Email or Password is incorrect';
+      } else {
+        this.authError = '';
+      }
+    });
+  }
 
   openLogin() {
     this.showLogin = true;
