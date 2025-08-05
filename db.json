@@ -5,6 +5,12 @@
       "name": "salah",
       "email": "momo@gmail.com",
       "password": "1234"
+    },
+    {
+      "name": "salah2",
+      "email": "salah@gmail.com",
+      "password": "1234",
+      "id": "rvJt9Yw"
     }
   ],
   "products": [
@@ -60,6 +66,12 @@
       "email": "salah@gmail.com",
       "password": "1234",
       "id": 1
+    },
+    {
+      "name": "nor",
+      "email": "nor@gmail.com",
+      "password": "1234",
+      "id": 2
     }
   ]
 }
