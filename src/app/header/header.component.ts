@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit {
   sellerName: string = '';
   userName: string = '';
   searchResult: Product[] = [];
+  cartItem = 0;
   @ViewChild('searchInput') searchInputRef!: ElementRef;
   constructor(private router: Router, private productService: ProductService) {}
 
@@ -50,6 +51,14 @@ export class HeaderComponent implements OnInit {
         }
       }
     });
+    let cartData = localStorage.getItem('cart');
+    if (cartData) {
+      this.cartItem = JSON.parse(cartData).length;
+    }
+    this.productService.cartData.subscribe((item: Product[]) => {
+      this.cartItem = item.length;
+    });
+    this.productService.initializeCartFromLocalStorage();
   }
 
   logout() {

@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Product } from '../model/product.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
+  cartData = new BehaviorSubject<Product[]>([]);
   constructor(private http: HttpClient) {}
 
   addProduct(data: Product): Observable<Object> {
@@ -44,5 +45,34 @@ export class ProductService {
     return this.http.get<Product[]>(
       `http://localhost:3000/products?q=${query}`
     );
+  }
+
+  localAddToCart(data: Product): void {
+    let cartData = [];
+    if (localStorage.getItem('cart')) {
+      cartData = JSON.parse(localStorage.getItem('cart') || '[]');
+    }
+    const existingProduct = cartData.find(
+      (item: Product) => item.id === data.id
+    );
+    if (existingProduct) {
+      existingProduct.quantity += data.quantity || 1;
+    } else {
+      cartData.push({ ...data, quantity: data.quantity || 1 });
+    }
+    localStorage.setItem('cart', JSON.stringify(cartData));
+    this.cartData.next(cartData);
+  }
+
+  localRemoveFromCart(productId: number): void {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const updatedCart = cart.filter((item: Product) => item.id !== productId);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    this.cartData.next(updatedCart);
+  }
+
+  initializeCartFromLocalStorage(): void {
+    const cartData = JSON.parse(localStorage.getItem('cart') || '[]');
+    this.cartData.next(cartData);
   }
 }

@@ -6,6 +6,7 @@ export interface Product {
   image: string;
   description: string;
   id: number;
+  quantity?: number;
 }
 // export interface ProductResponse {
 //   message: string;
