@@ -14,6 +14,7 @@ import { Product } from '../model/product.model';
 export class SellerUpdateProductComponent implements OnInit {
   product: Product | null = null;
   productMessage: string = '';
+
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService
@@ -28,17 +29,26 @@ export class SellerUpdateProductComponent implements OnInit {
       });
     }
   }
+
   submit(formValue: any): void {
     if (this.product) {
+      // Merge form values into current product
       const updatedProduct: Product = {
         ...this.product,
         ...formValue,
+        price: Number(formValue.price ?? this.product.price), // ensure number
+        discount:
+          formValue.discount !== undefined
+            ? Number(formValue.discount)
+            : this.product.discount, // keep old discount if not changed
       };
+
       this.productService
         .updateProduct(this.product.id.toString(), updatedProduct)
         .subscribe((response) => {
           console.log('Product updated successfully:', response);
           this.productMessage = 'Product updated successfully!';
+          setTimeout(() => (this.productMessage = ''), 3000);
         });
     } else {
       console.error('No product found to update.');

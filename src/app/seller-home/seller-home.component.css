@@ -1,6 +1,6 @@
 table {
   text-align: left;
-  color: blueviolet;
+  color: var(--main-color);
   border-collapse: collapse;
 }
 img {
@@ -9,7 +9,7 @@ img {
 }
 table td,
 table th {
-  border: 1px solid blueviolet;
+  border: 1px solid var(--main-color);
   padding: 10px;
   min-width: 160pxs;
 }

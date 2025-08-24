@@ -1,7 +1,7 @@
 .user-auth h1 {
   margin-top: 50px;
   margin-bottom: 80px;
-  color: blueviolet;
+  color: var(--main-color);
   text-align: center;
 }
 
@@ -9,6 +9,6 @@
   margin-bottom: 100px;
 }
 .user-auth a {
-  color: blueviolet;
+  color: var(--main-color);
   cursor: pointer;
 }

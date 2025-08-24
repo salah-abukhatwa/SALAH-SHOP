@@ -2,5 +2,5 @@
   text-align: center;
 }
 h1 {
-  color: blueviolet;
+  color: var(--main-color);
 }

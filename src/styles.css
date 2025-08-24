@@ -1,3 +1,7 @@
+:root {
+  --main-color: #30336b;
+}
+
 body {
   font-family: sans-serif;
 }
@@ -14,14 +18,14 @@ body {
 .form-input {
   height: 35px;
   margin-bottom: 20px;
-  border: 1px solid blueviolet;
+  border: 1px solid var(--main-color);
   padding-left: 15px;
-  color: blueviolet;
+  color: var(--main-color);
 }
 .form-button {
   height: 35px;
-  border: 1px solid blueviolet;
-  color: blueviolet;
+  border: 1px solid var(--main-color);
+  color: var(--main-color);
   cursor: pointer;
 }
 .error-p {

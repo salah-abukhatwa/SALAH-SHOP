@@ -18,12 +18,16 @@
       <button class="form-button">Buy Now</button>
       <button
         class="form-button"
-        *ngIf="removeProduct"
+        *ngIf="removeProduct && isGuestUser"
         (click)="removeFromCart()"
       >
         Remove from Cart
       </button>
-      <button class="form-button" *ngIf="!removeProduct" (click)="addToCart()">
+      <button
+        class="form-button"
+        *ngIf="!removeProduct || !isGuestUser"
+        (click)="addToCart()"
+      >
         Add to Cart
       </button>
 

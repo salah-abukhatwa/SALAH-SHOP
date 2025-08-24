@@ -14,23 +14,21 @@ import { UserService } from '../services/user.service';
 export class UserAuthComponent implements OnInit {
   showLogin = true;
   authError: string = '';
-  constructor(private userServices: UserService) {}
+
+  constructor(private userService: UserService) {}
+
   ngOnInit(): void {
-    this.userServices.reloadUser();
+    this.userService.reloadUser();
   }
 
   signUp(data: signUp) {
-    this.userServices.userSignUp(data);
+    this.userService.userSignUp(data);
   }
 
   login(data: login) {
-    this.userServices.userLogin(data);
-    this.userServices.isLoginError.subscribe((isError) => {
-      if (isError) {
-        this.authError = 'Email or Password is incorrect';
-      } else {
-        this.authError = '';
-      }
+    this.userService.userLogin(data);
+    this.userService.isLoginError.subscribe((isError) => {
+      this.authError = isError ? 'Email or Password is incorrect' : '';
     });
   }
 

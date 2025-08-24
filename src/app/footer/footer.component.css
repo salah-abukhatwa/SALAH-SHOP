@@ -17,6 +17,6 @@ ul {
   justify-content: space-between;
 }
 .footer ul li a {
-  color: blueviolet;
+  color: var(--main-color);
   text-decoration: none;
 }

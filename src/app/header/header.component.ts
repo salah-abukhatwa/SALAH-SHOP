@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { ProductService } from '../services/product.service';
-import { Product } from '../model/product.model';
+import { Cart, Product } from '../model/product.model';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
@@ -35,7 +35,6 @@ export class HeaderComponent implements OnInit {
           let sellerStore = localStorage.getItem('seller');
           let sellerData = sellerStore && JSON.parse(sellerStore)[0];
           this.sellerName = sellerData ? sellerData.name : '';
-          console.log(this.sellerName);
           this.menuType = 'seller';
         } else if (localStorage.getItem('user')) {
           let userStore = localStorage.getItem('user');
@@ -43,22 +42,38 @@ export class HeaderComponent implements OnInit {
             const parsed = JSON.parse(userStore);
             let userData = Array.isArray(parsed) ? parsed[0] : parsed;
             this.userName = userData?.name || '';
-            console.log(this.userName);
           }
           this.menuType = 'user';
+
+          //  Load cart from remote for logged-in user
+          const userId = JSON.parse(localStorage.getItem('user') || '[]')[0]
+            ?.id;
+          if (userId) {
+            this.productService.updateCartCountFromRemote(userId);
+          }
         } else {
           this.menuType = 'default';
+          //  Only initialize from local if not logged in
+          this.productService.initializeCartFromLocalStorage();
         }
+
+        //  Subscribe once to keep cart badge updated
+        this.productService.cartData.subscribe((cart: Cart[]) => {
+          this.cartItem = cart.length;
+        });
       }
     });
-    let cartData = localStorage.getItem('cart');
-    if (cartData) {
-      this.cartItem = JSON.parse(cartData).length;
+
+    // Initial load (in case no router event yet)
+
+    if (!localStorage.getItem('user')) {
+      this.productService.initializeCartFromLocalStorage();
+    } else {
+      const userId = JSON.parse(localStorage.getItem('user') || '[]')[0]?.id;
+      if (userId) {
+        this.productService.updateCartCountFromRemote(userId);
+      }
     }
-    this.productService.cartData.subscribe((item: Product[]) => {
-      this.cartItem = item.length;
-    });
-    this.productService.initializeCartFromLocalStorage();
   }
 
   logout() {
@@ -78,7 +93,7 @@ export class HeaderComponent implements OnInit {
       this.productService
         .searchProducts(query)
         .pipe(
-          debounceTime(300), // Wait 300ms after last keystroke
+          debounceTime(300),
           distinctUntilChanged() // Only if query changed
         )
         .subscribe((result) => {

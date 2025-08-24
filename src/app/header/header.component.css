@@ -6,7 +6,7 @@ nav {
 .nav h1,
 .nav h1 a {
   font-size: 40px;
-  color: blueviolet;
+  color: var(--main-color);
   margin: 0;
 }
 .nav-search {
@@ -18,15 +18,15 @@ nav {
 }
 input {
   flex: 1;
-  color: blueviolet;
-  border: 1px solid blueviolet;
+  color: var(--main-color);
+  border: 1px solid var(--main-color);
   height: 35px;
   border-right: none;
 }
 
 button {
-  color: blueviolet;
-  border: 1px solid blueviolet;
+  color: var(--main-color);
+  border: 1px solid var(--main-color);
   height: 35px;
 }
 ul {
@@ -42,7 +42,7 @@ ul li {
 }
 ul li a {
   text-decoration: none;
-  color: blueviolet;
+  color: var(--main-color);
 }
 ul li a:hover {
   color: #000;
@@ -66,5 +66,5 @@ ul li a.active {
 }
 .suggested-search li a {
   cursor: pointer;
-  color: blueviolet;
+  color: var(--main-color);
 }

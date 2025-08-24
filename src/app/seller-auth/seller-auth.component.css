@@ -6,10 +6,10 @@
 .login h1 {
   margin-top: 50px;
   margin-bottom: 80px;
-  color: blueviolet;
+  color: var(--main-color);
 }
 .auth-toggle-link {
   text-decoration: none;
-  color: blueviolet;
+  color: var(--main-color);
   font-weight: bold;
 }

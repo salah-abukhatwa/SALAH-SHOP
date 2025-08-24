@@ -16,7 +16,14 @@ export class SellerAddProductComponent {
   constructor(private productService: ProductService) {}
 
   submit(data: Product, form: NgForm) {
+    // Convert discount and price to numbers (in case user enters strings)
+    data.price = Number(data.price);
+    if (data.discount !== undefined) {
+      data.discount = Number(data.discount);
+    }
+
     console.log('Product data submitted:', data);
+
     this.productService.addProduct(data).subscribe((result) => {
       console.log('Product added successfully:', result);
       if (result) {

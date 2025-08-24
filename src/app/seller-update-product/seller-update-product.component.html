@@ -49,6 +49,16 @@
       name="image"
       ngModel="{{ product?.image }}"
     />
+    <input
+      type="number"
+      class="form-input"
+      placeholder="Enter Product Discount (%)"
+      name="discount"
+      ngModel="{{ product?.discount }}"
+      min="0"
+      max="100"
+    />
+
     <button class="form-button">Update Product</button>
   </form>
 </div>

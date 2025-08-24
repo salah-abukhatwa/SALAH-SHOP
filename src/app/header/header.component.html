@@ -1,6 +1,6 @@
 <nav class="nav">
-  <h1><a routerLink="/">E-commerce</a></h1>
-  <div class="nav-search" *ngIf="menuType === 'default'">
+  <h1><a routerLink="/">E-Shop</a></h1>
+  <div class="nav-search" *ngIf="menuType === 'default' || menuType === 'user'">
     <input
       #searchInput
       type="text"
@@ -26,20 +26,24 @@
         <li><a routerLink="">Home</a></li>
         <li><a routerLink="user-auth">Login/sign-up</a></li>
         <li>
-          <a href="#">Cart({{ cartItem }})</a>
+          <a routerLink="cart">Cart({{ cartItem }})</a>
         </li>
       </ul>
     </ng-container>
     <ng-container *ngSwitchCase="'user'">
       <ul>
         <li><a routerLink="seller-auth">Seller</a></li>
-        <li><a routerLink="">Home</a></li>
         <li>
           <a>{{ userName | titlecase }}</a>
         </li>
+        <li><a routerLink="">Home</a></li>
+
         <li><a (click)="userLogout()">Logout</a></li>
+        <li><a routerLink="orders">Orders</a></li>
         <li>
-          <a href="">Cart({{ cartItem }})</a>
+          <a [routerLink]="cartItem > 0 ? 'cart' : null"
+            >Cart({{ cartItem }})</a
+          >
         </li>
       </ul>
     </ng-container>

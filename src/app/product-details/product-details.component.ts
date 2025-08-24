@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ProductService } from '../services/product.service';
-import { Product } from '../model/product.model';
+import { Cart, Product } from '../model/product.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -16,6 +16,7 @@ export class ProductDetailsComponent implements OnInit {
   productData: Product | null = null;
   productQuantity: number = 1;
   removeProduct: boolean = false;
+  isGuestUser = !localStorage.getItem('user');
 
   constructor(
     private route: ActivatedRoute,
@@ -28,13 +29,13 @@ export class ProductDetailsComponent implements OnInit {
     if (productId) {
       this.productService.getProduct(productId).subscribe((data: Product) => {
         this.productData = data;
+
+        // Check if this product already exists in local cart
         const cart = JSON.parse(localStorage.getItem('cart') || '[]');
         this.removeProduct = cart.some(
           (item: Product) => item.id === this.productData?.id
         );
       });
-    }
-    {
     }
   }
 
@@ -45,17 +46,37 @@ export class ProductDetailsComponent implements OnInit {
       this.productQuantity -= 1;
     }
   }
+
   addToCart() {
-    if (this.productData) {
+    if (!this.productData) return;
+
+    if (this.isGuestUser) {
+      // Guest user: use localStorage cart
       const productToAdd = {
         ...this.productData,
         quantity: this.productQuantity,
       };
-
       this.productService.localAddToCart(productToAdd);
       this.removeProduct = true;
+    } else {
+      // Logged-in user: save to remote cart
+      const userStore = localStorage.getItem('user');
+      const userId = userStore && JSON.parse(userStore)[0].id;
+
+      if (userId && this.productData) {
+        const productToAdd: Cart = {
+          productId: this.productData.id,
+          userId: userId,
+          quantity: this.productQuantity,
+        };
+
+        this.productService.addToCart(productToAdd).subscribe(() => {
+          this.removeProduct = true;
+        });
+      }
     }
   }
+
   removeFromCart(): void {
     if (this.productData) {
       this.productService.localRemoveFromCart(this.productData.id);

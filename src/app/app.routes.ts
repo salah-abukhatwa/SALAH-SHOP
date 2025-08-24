@@ -8,6 +8,10 @@ import { SellerUpdateProductComponent } from './seller-update-product/seller-upd
 import { SearchComponent } from './search/search.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { UserAuthComponent } from './user-auth/user-auth.component';
+import { CartPageComponent } from './cart-page/cart-page.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { OrdersComponent } from './orders/orders.component';
+import { userAuthGuard } from './user-auth.guard';
 
 export const routes: Routes = [
   {
@@ -44,5 +48,19 @@ export const routes: Routes = [
   {
     component: UserAuthComponent,
     path: 'user-auth',
+  },
+  {
+    component: CartPageComponent,
+    path: 'cart',
+  },
+  {
+    component: CheckoutComponent,
+    path: 'checkout',
+    canActivate: [userAuthGuard],
+  },
+  {
+    component: OrdersComponent,
+    path: 'orders',
+    canActivate: [userAuthGuard],
   },
 ];

@@ -17,38 +17,42 @@
     {
       "id": "bca1",
       "name": "Iphone 15 pro max",
-      "price": "1550",
-      "color": "titanium",
+      "price": 1550,
+      "color": "gray",
       "category": "mobile",
       "image": "https://cdn.akakce.com/z/apple/iphone-15-pro-max-256-gb-naturel-titanyum.jpg",
-      "description": " iPhone 15 Pro Max, RAM Capacity: 8 GB, Internal Memory: 256 GB, Screen Size: 6.7 inches, Battery Capacity: 4422 mAh, Release Year: 2023"
+      "description": " iPhone 15 Pro Max, RAM Capacity: 8 GB, Internal Memory: 256 GB, Screen Size: 6.7 inches, Battery Capacity: 4422 mAh, Release Year: 2023",
+      "discount": 7
     },
     {
       "id": "0b6e",
       "name": "samsung Galaxy S24 Ultra",
-      "price": "1300",
+      "price": 1300,
       "category": "mobile",
-      "color": "Titanium Grey",
+      "color": " Grey",
       "description": "Stunning display, excellent battery life, robust performance, improved ecosystem",
-      "image": "https://images.samsung.com/is/image/samsung/p6pim/tr/2401/gallery/tr-galaxy-s24-s928-sm-s928bzkqtur-539306221?$684_547_PNG$"
+      "image": "https://images.samsung.com/is/image/samsung/p6pim/tr/2401/gallery/tr-galaxy-s24-s928-sm-s928bzkqtur-539306221?$684_547_PNG$",
+      "discount": 5
     },
     {
       "id": "d786",
       "name": "PlayStation 5 ",
-      "price": "500",
+      "price": 600,
       "category": "video games",
       "color": "white",
       "description": "PS5® Digital Edition is an all-digital version of the PS5® console with no disc drive.ASTRO BOT Bundle",
-      "image": "https://i5.walmartimages.com/seo/PS5-Digital-Bundle-Astrobot_a0549be1-b338-42a0-a782-ded56d9ba04c.07912cf9eb10f1bba05b1cc4dcc099ea.png?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF"
+      "image": "https://i5.walmartimages.com/seo/PS5-Digital-Bundle-Astrobot_a0549be1-b338-42a0-a782-ded56d9ba04c.07912cf9eb10f1bba05b1cc4dcc099ea.png?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
+      "discount": 2
     },
     {
       "id": "0037",
       "name": "Samsung Galaxy Tab A9",
-      "price": "190",
+      "price": 190,
       "category": "tech",
       "color": "Graphite",
       "description": "SAMSUNG Galaxy Tab A9+ (SM-X210), 64GB 4GB RAM, WiFi Only, 11\" Display, International Version - (Graphite)",
-      "image": "https://i5.walmartimages.com/seo/SAMSUNG-Galaxy-Tab-A9-SM-X210-64GB-4GB-RAM-WiFi-Only-11-Display-International-Version-Graphite_e05217ad-e7c5-44ee-a2ed-be8b66b6f399.e4e7ac90c9d12632b3ede31728caeb42.jpeg?odnHeight=117&odnWidth=117&odnBg=FFFFFF"
+      "image": "https://i5.walmartimages.com/seo/SAMSUNG-Galaxy-Tab-A9-SM-X210-64GB-4GB-RAM-WiFi-Only-11-Display-International-Version-Graphite_e05217ad-e7c5-44ee-a2ed-be8b66b6f399.e4e7ac90c9d12632b3ede31728caeb42.jpeg?odnHeight=117&odnWidth=117&odnBg=FFFFFF",
+      "discount": 8
     },
     {
       "id": "6e36",
@@ -72,6 +76,25 @@
       "email": "nor@gmail.com",
       "password": "1234",
       "id": 2
+    }
+  ],
+  "cart": [],
+  "orders": [
+    {
+      "address": "turkey/eskishehir",
+      "email": "salah@gmail.com",
+      "contact": "5316793023",
+      "totalPrice": 1300,
+      "userId": 1,
+      "id": 1
+    },
+    {
+      "address": "turkey/eskishehir",
+      "email": "salah@gmail.com",
+      "contact": "5316793023",
+      "totalPrice": 1550,
+      "userId": 1,
+      "id": 3
     }
   ]
 }
