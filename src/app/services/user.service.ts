@@ -25,7 +25,7 @@ export class UserService {
         if (result) {
           alert('Sign Up Successful');
           this.isUserLoggedIn.next(true);
-          localStorage.setItem('user', JSON.stringify([result.body]));
+          localStorage.setItem('user', JSON.stringify(result.body));
           this.syncCartAfterAuth();
           this.router.navigate(['/']);
         } else {
@@ -45,7 +45,7 @@ export class UserService {
           alert('Login Successful');
           this.isUserLoggedIn.next(true);
           this.isLoginError.next(false);
-          localStorage.setItem('user', JSON.stringify(result.body));
+          localStorage.setItem('user', JSON.stringify(result.body[0]));
           this.syncCartAfterAuth();
           this.router.navigate(['/']);
         } else {

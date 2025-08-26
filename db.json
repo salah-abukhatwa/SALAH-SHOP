@@ -1,16 +1,10 @@
 {
   "seller": [
     {
-      "id": "a9f3",
       "name": "salah",
-      "email": "momo@gmail.com",
-      "password": "1234"
-    },
-    {
-      "name": "salah2",
       "email": "salah@gmail.com",
-      "password": "1234",
-      "id": "rvJt9Yw"
+      "password": "12345",
+      "id": 1
     }
   ],
   "products": [
@@ -62,23 +56,50 @@
       "color": "Pink",
       "description": "Nostalgia Retro Microwave for Countertop 0.7 cu ft Vintage Microwave, Pink",
       "image": "https://i5.walmartimages.com/seo/Nostalgia-Retro-0-7-Cu-ft-700-Watt-Countertop-Microwave-Oven-Pink_1d9af349-b9c2-4900-b095-087aa8a30eea.4782a8494754091b87f9672ed65826e1.jpeg?odnHeight=117&odnWidth=117&odnBg=FFFFFF"
+    },
+    {
+      "name": "Nintendo Switch™ 2",
+      "price": 538.9,
+      "category": "video games",
+      "color": "black",
+      "description": "Start your next gaming adventure with the Nintendo Switch™ 2 system —packed with upgrades and fun ways to connect and play together!",
+      "image": "https://i5.walmartimages.com/seo/Nintendo-Switch-2-System_70372a2a-0166-4a96-b99e-41cfc5b972df.ce8b230cd4608afb4eda15604fc9fbff.png?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
+      "discount": 2,
+      "id": "g_fSKwZ"
+    },
+    {
+      "name": "EasySMX 2.4G",
+      "price": 35.9,
+      "category": "headset ",
+      "color": "black",
+      "description": "EasySMX V07W Wireless Gaming Headphones features stereo sound, ultra-low latency, noise-cancelling microphone, easy and comfortable to wear,",
+      "image": "https://i5.walmartimages.com/seo/EasySMX-V07W-Wireless-Gaming-Headset-for-PS5-PS4-PC-2-4G-Over-Ear-Bluetooth-Gaming-Headphones-with-Microphone-Wired-Mode-for-Xbox-Series-Black_8f9590be-c7d6-46b6-89b7-e268a531402c.eb453f1fc51f6b85008200a510e9f195.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF",
+      "discount": 0,
+      "id": "9egBiA0"
     }
   ],
   "users": [
     {
-      "name": "salah",
-      "email": "salah@gmail.com",
+      "name": "momo",
+      "email": "momo@gmail.com",
       "password": "1234",
+      "id": 1
+    }
+  ],
+  "cart": [
+    {
+      "productId": "bca1",
+      "userId": 1,
+      "quantity": 1,
       "id": 1
     },
     {
-      "name": "nor",
-      "email": "nor@gmail.com",
-      "password": "1234",
+      "productId": "d786",
+      "userId": 1,
+      "quantity": 1,
       "id": 2
     }
   ],
-  "cart": [],
   "orders": [
     {
       "address": "turkey/eskishehir",

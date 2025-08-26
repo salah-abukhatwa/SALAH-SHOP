@@ -46,8 +46,7 @@ export class HeaderComponent implements OnInit {
           this.menuType = 'user';
 
           //  Load cart from remote for logged-in user
-          const userId = JSON.parse(localStorage.getItem('user') || '[]')[0]
-            ?.id;
+          const userId = JSON.parse(localStorage.getItem('user') || '[]').id;
           if (userId) {
             this.productService.updateCartCountFromRemote(userId);
           }
@@ -69,7 +68,7 @@ export class HeaderComponent implements OnInit {
     if (!localStorage.getItem('user')) {
       this.productService.initializeCartFromLocalStorage();
     } else {
-      const userId = JSON.parse(localStorage.getItem('user') || '[]')[0]?.id;
+      const userId = JSON.parse(localStorage.getItem('user') || '[]').id;
       if (userId) {
         this.productService.updateCartCountFromRemote(userId);
       }
@@ -92,10 +91,7 @@ export class HeaderComponent implements OnInit {
     if (query.length > 2) {
       this.productService
         .searchProducts(query)
-        .pipe(
-          debounceTime(300),
-          distinctUntilChanged() // Only if query changed
-        )
+        .pipe(debounceTime(300), distinctUntilChanged())
         .subscribe((result) => {
           this.searchResult = result;
         });

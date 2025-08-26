@@ -20,7 +20,7 @@ export class SellerService {
         if (result) {
           alert('Sign Up Successful');
           this.isSellerLoggedIn.next(true);
-          localStorage.setItem('seller', JSON.stringify([result.body]));
+          localStorage.setItem('seller', JSON.stringify(result.body));
 
           this.router.navigate(['/seller-home']);
         } else {
@@ -40,7 +40,7 @@ export class SellerService {
           alert('Login Successful');
           this.isSellerLoggedIn.next(true);
           this.isLoginError.next(false);
-          localStorage.setItem('seller', JSON.stringify(result.body));
+          localStorage.setItem('seller', JSON.stringify(result.body[0]));
           this.router.navigate(['/seller-home']);
         } else {
           this.isLoginError.next(true);

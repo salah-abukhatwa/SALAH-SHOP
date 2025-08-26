@@ -36,7 +36,7 @@ export class ProductService {
   }
 
   trendyProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>('http://localhost:3000/products?_limit=5');
+    return this.http.get<Product[]>('http://localhost:3000/products?_limit=8');
   }
 
   searchProducts(query: string): Observable<Product[]> {
@@ -99,7 +99,7 @@ export class ProductService {
     const userData = userStore ? JSON.parse(userStore) : null;
 
     if (userData) {
-      const userId = Array.isArray(userData) ? userData[0]?.id : userData.id;
+      const userId = userData.id;
       return this.http.get<Cart[]>(
         `http://localhost:3000/cart?userId=${userId}`
       );
@@ -147,7 +147,7 @@ export class ProductService {
     const userStore = localStorage.getItem('user');
     const userData = userStore ? JSON.parse(userStore) : null;
 
-    const userId = Array.isArray(userData) ? userData[0]?.id : userData.id;
+    const userId = userData.id;
     return this.http.get<order[]>(
       `http://localhost:3000/orders?userId=${userId}`
     );

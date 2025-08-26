@@ -61,7 +61,7 @@ export class ProductDetailsComponent implements OnInit {
     } else {
       // Logged-in user: save to remote cart
       const userStore = localStorage.getItem('user');
-      const userId = userStore && JSON.parse(userStore)[0].id;
+      const userId = userStore && JSON.parse(userStore).id;
 
       if (userId && this.productData) {
         const productToAdd: Cart = {
