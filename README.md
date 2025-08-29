@@ -3,11 +3,10 @@ This is a complete e-commerce web application built with Angular, featuring Sell
 
 ## Key Features
  **Seller Module**
-
 - Seller login & signup.
--Add products with details (name, image, description, category, color, price, discount).
--Edit, update, or delete products.
--Seller dashboard for managing products.
+- Add products with details (name, image, description, category, color, price, discount).
+- Edit, update, or delete products.
+- Seller dashboard for managing products.
 
  **User Module**
 - User login & signup.
