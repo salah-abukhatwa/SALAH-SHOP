@@ -21,21 +21,21 @@ Product listing on the homepage.
 
 **Product Details**: View full product details and add items to the cart.
 
-  ## Shopping Cart:
+  **Shopping Cart**:
   Add/remove products, adjust quantities.
   
   View discounted prices (old price vs. new price).
   
   Cart summary with tax, delivery, discount, and total.
   
-  ## Checkout Page:
+  **Checkout Page**:
   Enter shipping details (address, email, phone).
   
   “Pay on Delivery” option.
   
   Order summary with total calculation.
   
-  ## Orders Page:
+ **Orders Page**:
   
   List of all user orders with ID, price, status.
   
