@@ -17,9 +17,11 @@ User login & signup.
 
 Product listing on the homepage.
 
-**Search functionality**: Search by name, category, or color with instant results preview.
+**Search functionality**: 
+Search by name, category, or color with instant results preview.
 
-**Product Details**: View full product details and add items to the cart.
+**Product Details**: 
+View full product details and add items to the cart.
 
   **Shopping Cart**:
   Add/remove products, adjust quantities.
