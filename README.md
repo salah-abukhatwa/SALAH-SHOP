@@ -1,6 +1,4 @@
-## Angular E-Commerce Project
-
-# SALAH SHOP
+# Angular E-Commerce Project
 This is a complete e-commerce web application built with Angular, featuring Seller and User modules. Sellers can manage products while users can browse, search, and purchase seamlessly. The project uses JSON Server as the backend for APIs and data.
 
 ## Development server
