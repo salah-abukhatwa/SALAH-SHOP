@@ -24,6 +24,7 @@ Search by name, category, or color with instant results preview.
 View full product details and add items to the cart.
 
   **Shopping Cart**:
+  
   Add/remove products, adjust quantities.
   
   View discounted prices (old price vs. new price).
@@ -31,6 +32,7 @@ View full product details and add items to the cart.
   Cart summary with tax, delivery, discount, and total.
   
   **Checkout Page**:
+  
   Enter shipping details (address, email, phone).
   
   “Pay on Delivery” option.
