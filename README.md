@@ -30,5 +30,4 @@ JSON Server (Mock backend).
 
 
 
-
-This project was generated with version 17.3.7.
+This project was generated with [Angular CLI] version 17.3.7.
