@@ -4,11 +4,14 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { ProductService } from './product.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
+  private apiUrl = environment.apiUrl;
+
   isUserLoggedIn = new BehaviorSubject<boolean>(false);
   isLoginError = new BehaviorSubject<boolean>(false);
 
@@ -20,7 +23,7 @@ export class UserService {
 
   userSignUp(data: signUp) {
     return this.http
-      .post('http://localhost:3000/users', data, { observe: 'response' })
+      .post(`${this.apiUrl}/users`, data, { observe: 'response' })
       .subscribe((result: any) => {
         if (result) {
           alert('Sign Up Successful');
@@ -37,7 +40,7 @@ export class UserService {
   userLogin(data: login) {
     this.http
       .get(
-        `http://localhost:3000/users?email=${data.email}&password=${data.password}`,
+        `${this.apiUrl}/users?email=${data.email}&password=${data.password}`,
         { observe: 'response' }
       )
       .subscribe((result: any) => {

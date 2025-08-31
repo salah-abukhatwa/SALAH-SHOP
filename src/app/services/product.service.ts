@@ -2,47 +2,47 @@ import { Injectable } from '@angular/core';
 import { Cart, order, Product } from '../model/product.model';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
+  private apiUrl = environment.apiUrl;
   cartData = new BehaviorSubject<Cart[]>([]);
 
   constructor(private http: HttpClient) {}
 
   addProduct(data: Product): Observable<Object> {
-    return this.http.post('http://localhost:3000/products', data);
+    return this.http.post(`${this.apiUrl}/products`, data);
   }
 
   productList(): Observable<Product[]> {
-    return this.http.get<Product[]>('http://localhost:3000/products');
+    return this.http.get<Product[]>(`${this.apiUrl}/products`);
   }
 
   deleteProduct(id: number): Observable<Object> {
-    return this.http.delete(`http://localhost:3000/products/${id}`);
+    return this.http.delete(`${this.apiUrl}/products/${id}`);
   }
 
   getProduct(id: string): Observable<Product> {
-    return this.http.get<Product>(`http://localhost:3000/products/${id}`);
+    return this.http.get<Product>(`${this.apiUrl}/products/${id}`);
   }
 
   updateProduct(id: string, data: Product): Observable<Object> {
-    return this.http.put(`http://localhost:3000/products/${id}`, data);
+    return this.http.put(`${this.apiUrl}/products/${id}`, data);
   }
 
   popularProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>('http://localhost:3000/products?_limit=3');
+    return this.http.get<Product[]>(`${this.apiUrl}/products?_limit=3`);
   }
 
   trendyProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>('http://localhost:3000/products?_limit=8');
+    return this.http.get<Product[]>(`${this.apiUrl}/products?_limit=8`);
   }
 
   searchProducts(query: string): Observable<Product[]> {
-    return this.http.get<Product[]>(
-      `http://localhost:3000/products?q=${query}`
-    );
+    return this.http.get<Product[]>(`${this.apiUrl}/products?q=${query}`);
   }
 
   // -------------------- CART METHODS --------------------
@@ -88,7 +88,7 @@ export class ProductService {
 
   updateCartCountFromRemote(userId: number) {
     this.http
-      .get(`http://localhost:3000/cart?userId=${userId}`)
+      .get(`${this.apiUrl}/cart?userId=${userId}`)
       .subscribe((cartItems: any) => {
         this.cartData.next(cartItems as any);
       });
@@ -100,9 +100,7 @@ export class ProductService {
 
     if (userData) {
       const userId = userData.id;
-      return this.http.get<Cart[]>(
-        `http://localhost:3000/cart?userId=${userId}`
-      );
+      return this.http.get<Cart[]>(`${this.apiUrl}/cart?userId=${userId}`);
     } else {
       const localCart = JSON.parse(localStorage.getItem('cart') || '[]');
       const normalized = localCart.map((item: any) => ({
@@ -114,7 +112,7 @@ export class ProductService {
   }
 
   deleteCartItem(cartId: number) {
-    return this.http.delete(`http://localhost:3000/cart/${cartId}`);
+    return this.http.delete(`${this.apiUrl}/cart/${cartId}`);
   }
 
   calculateCartTotals(cartItems: any[]) {
@@ -140,7 +138,7 @@ export class ProductService {
   }
 
   placeOrder(order: order) {
-    return this.http.post('http://localhost:3000/orders', order);
+    return this.http.post(`${this.apiUrl}/orders`, order);
   }
 
   orderList() {
@@ -148,12 +146,10 @@ export class ProductService {
     const userData = userStore ? JSON.parse(userStore) : null;
 
     const userId = userData.id;
-    return this.http.get<order[]>(
-      `http://localhost:3000/orders?userId=${userId}`
-    );
+    return this.http.get<order[]>(`${this.apiUrl}/orders?userId=${userId}`);
   }
 
   cancelOrder(id: number) {
-    return this.http.delete(`http://localhost:3000/orders/${id}`);
+    return this.http.delete(`${this.apiUrl}/orders/${id}`);
   }
 }

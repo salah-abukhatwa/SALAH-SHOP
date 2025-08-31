@@ -3,18 +3,21 @@ import { Injectable } from '@angular/core';
 import { login, signUp } from '../model/auth-data.model';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SellerService {
+  private apiUrl = environment.apiUrl;
+
   isSellerLoggedIn = new BehaviorSubject<boolean>(false);
   isLoginError = new BehaviorSubject<boolean>(false);
   constructor(private http: HttpClient, private router: Router) {}
 
   userSignUp(data: signUp) {
     return this.http
-      .post('http://localhost:3000/seller', data, { observe: 'response' })
+      .post(`${this.apiUrl}/seller`, data, { observe: 'response' })
       .subscribe((result) => {
         console.log(result);
         if (result) {
@@ -31,7 +34,7 @@ export class SellerService {
   userLogin(data: login) {
     this.http
       .get(
-        `http://localhost:3000/seller?email=${data.email}&password=${data.password}`,
+        `${this.apiUrl}/seller?email=${data.email}&password=${data.password}`,
         { observe: 'response' }
       )
       .subscribe((result: any) => {

@@ -84,6 +84,12 @@
       "email": "momo@gmail.com",
       "password": "1234",
       "id": 1
+    },
+    {
+      "name": "salah",
+      "email": "salah@gmail.com",
+      "password": "1234",
+      "id": 2
     }
   ],
   "cart": [
@@ -98,6 +104,24 @@
       "userId": 1,
       "quantity": 1,
       "id": 2
+    },
+    {
+      "productId": "bca1",
+      "userId": 2,
+      "quantity": 1,
+      "id": 3
+    },
+    {
+      "productId": "bca1",
+      "userId": 2,
+      "quantity": 1,
+      "id": 4
+    },
+    {
+      "productId": "d786",
+      "userId": 2,
+      "quantity": 1,
+      "id": 5
     }
   ],
   "orders": [
