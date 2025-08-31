@@ -77,7 +77,11 @@ export class CartPageComponent implements OnInit {
   }
 
   removeFromCart(cartId: number): void {
-    const user = localStorage.getItem('user');
+    let user: string | null = null;
+
+    if (typeof localStorage !== 'undefined') {
+      user = localStorage.getItem('user');
+    }
     if (user) {
       this.productService.deleteCartItem(cartId).subscribe(() => {
         this.loadCart();

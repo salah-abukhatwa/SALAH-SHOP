@@ -70,7 +70,11 @@ export class CheckoutComponent implements OnInit {
   }
 
   orderNow(data: { email: string; address: string; contact: string }) {
-    let user = localStorage.getItem('user');
+    let user: string | null = null;
+
+    if (typeof localStorage !== 'undefined') {
+      user = localStorage.getItem('user');
+    }
     let userData = user && JSON.parse(user)[0];
 
     if (this.totalPrice && userData) {

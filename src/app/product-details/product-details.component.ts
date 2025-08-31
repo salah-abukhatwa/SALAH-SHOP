@@ -10,13 +10,13 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [RouterModule, CommonModule, FormsModule],
   templateUrl: './product-details.component.html',
-  styleUrl: './product-details.component.css',
+  styleUrls: ['./product-details.component.css'],
 })
 export class ProductDetailsComponent implements OnInit {
   productData: Product | null = null;
   productQuantity: number = 1;
   removeProduct: boolean = false;
-  isGuestUser = !localStorage.getItem('user');
+  isGuestUser = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,17 +24,23 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Safe access to localStorage
+    if (typeof localStorage !== 'undefined') {
+      this.isGuestUser = !localStorage.getItem('user');
+    }
+
     const productId = this.route.snapshot.paramMap.get('id');
 
     if (productId) {
       this.productService.getProduct(productId).subscribe((data: Product) => {
         this.productData = data;
 
-        // Check if this product already exists in local cart
-        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-        this.removeProduct = cart.some(
-          (item: Product) => item.id === this.productData?.id
-        );
+        if (typeof localStorage !== 'undefined') {
+          const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+          this.removeProduct = cart.some(
+            (item: Product) => item.id === this.productData?.id
+          );
+        }
       });
     }
   }
@@ -50,7 +56,7 @@ export class ProductDetailsComponent implements OnInit {
   addToCart() {
     if (!this.productData) return;
 
-    if (this.isGuestUser) {
+    if (typeof localStorage === 'undefined' || this.isGuestUser) {
       // Guest user: use localStorage cart
       const productToAdd = {
         ...this.productData,
@@ -61,9 +67,9 @@ export class ProductDetailsComponent implements OnInit {
     } else {
       // Logged-in user: save to remote cart
       const userStore = localStorage.getItem('user');
-      const userId = userStore && JSON.parse(userStore).id;
+      const userId = userStore && JSON.parse(userStore)[0]?.id;
 
-      if (userId && this.productData) {
+      if (userId) {
         const productToAdd: Cart = {
           productId: this.productData.id,
           userId: userId,
@@ -78,7 +84,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   removeFromCart(): void {
-    if (this.productData) {
+    if (typeof localStorage !== 'undefined' && this.productData) {
       this.productService.localRemoveFromCart(this.productData.id);
       this.removeProduct = false;
     }

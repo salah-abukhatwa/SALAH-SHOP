@@ -46,35 +46,40 @@ export class ProductService {
 
   // -------------------- CART METHODS --------------------
   localAddToCart(data: Product): void {
-    let cartData = JSON.parse(localStorage.getItem('cart') || '[]');
-    const existingProduct = cartData.find(
-      (item: Product) => item.id === data.id
-    );
+    if (typeof localStorage !== 'undefined') {
+      let cartData = JSON.parse(localStorage.getItem('cart') || '[]');
+      const existingProduct = cartData.find(
+        (item: Product) => item.id === data.id
+      );
 
-    if (existingProduct) {
-      existingProduct.quantity += data.quantity || 1;
-    } else {
-      cartData.push({ ...data, quantity: data.quantity || 1 });
+      if (existingProduct) {
+        existingProduct.quantity += data.quantity || 1;
+      } else {
+        cartData.push({ ...data, quantity: data.quantity || 1 });
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cartData));
+      this.cartData.next(cartData);
     }
-
-    localStorage.setItem('cart', JSON.stringify(cartData));
-    this.cartData.next(cartData);
   }
 
   localRemoveFromCart(productId: number): void {
-    const updatedCart = JSON.parse(localStorage.getItem('cart') || '[]').filter(
-      (item: Product) => item.id !== productId
-    );
+    if (typeof localStorage !== 'undefined') {
+      const updatedCart = JSON.parse(
+        localStorage.getItem('cart') || '[]'
+      ).filter((item: Product) => item.id !== productId);
 
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
-    this.cartData.next(updatedCart);
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      this.cartData.next(updatedCart);
+    }
   }
 
   initializeCartFromLocalStorage(): void {
-    const cartData = JSON.parse(localStorage.getItem('cart') || '[]');
-    this.cartData.next(cartData);
+    if (typeof localStorage !== 'undefined') {
+      const cartData = JSON.parse(localStorage.getItem('cart') || '[]');
+      this.cartData.next(cartData);
+    }
   }
-
   addToCart(cartData: Cart) {
     return this.http.post('http://localhost:3000/cart', cartData).pipe(
       tap(() => {
@@ -94,19 +99,24 @@ export class ProductService {
   }
 
   getCartItems() {
-    const userStore = localStorage.getItem('user');
-    const userData = userStore ? JSON.parse(userStore) : null;
+    if (typeof localStorage !== 'undefined') {
+      const userStore = localStorage.getItem('user');
+      const userData = userStore ? JSON.parse(userStore) : null;
 
-    if (userData) {
-      const userId = userData.id;
-      return this.http.get<Cart[]>(`${this.apiUrl}/cart?userId=${userId}`);
+      if (userData) {
+        const userId = userData.id;
+        return this.http.get<Cart[]>(`${this.apiUrl}/cart?userId=${userId}`);
+      } else {
+        const localCart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const normalized = localCart.map((item: any) => ({
+          ...item,
+          product: item as Product,
+        }));
+        return new BehaviorSubject<Cart[]>(normalized);
+      }
     } else {
-      const localCart = JSON.parse(localStorage.getItem('cart') || '[]');
-      const normalized = localCart.map((item: any) => ({
-        ...item,
-        product: item as Product, // 👈 wrap product
-      }));
-      return new BehaviorSubject<Cart[]>(normalized);
+      // During SSR, return empty observable
+      return new BehaviorSubject<Cart[]>([]);
     }
   }
 
@@ -141,11 +151,15 @@ export class ProductService {
   }
 
   orderList() {
-    const userStore = localStorage.getItem('user');
-    const userData = userStore ? JSON.parse(userStore) : null;
-
-    const userId = userData.id;
-    return this.http.get<order[]>(`${this.apiUrl}/orders?userId=${userId}`);
+    if (typeof localStorage !== 'undefined') {
+      const userStore = localStorage.getItem('user');
+      const userData = userStore ? JSON.parse(userStore) : null;
+      const userId = userData?.id;
+      if (userId) {
+        return this.http.get<order[]>(`${this.apiUrl}/orders?userId=${userId}`);
+      }
+    }
+    return new BehaviorSubject<order[]>([]);
   }
 
   cancelOrder(id: number) {

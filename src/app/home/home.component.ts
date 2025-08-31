@@ -4,20 +4,21 @@ import { ProductService } from '../services/product.service';
 import { Cart, Product } from '../model/product.model';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [NgbCarouselModule, CommonModule, RouterModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
   products: Product[] = [];
   popularProducts: Product[] = [];
   trendyProducts: Product[] = [];
+
   constructor(private productService: ProductService) {}
+
   ngOnInit() {
     this.productService.popularProducts().subscribe((data) => {
       this.popularProducts = data;
@@ -31,7 +32,14 @@ export class HomeComponent implements OnInit {
   }
 
   addToCart(product: Product): void {
-    const user = localStorage.getItem('user');
+    let user: any = null;
+
+    if (typeof localStorage !== 'undefined') {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser) {
+        user = JSON.parse(storedUser);
+      }
+    }
 
     if (!user) {
       // Guest user → localStorage
@@ -40,7 +48,7 @@ export class HomeComponent implements OnInit {
       alert('Added to cart (Guest)');
     } else {
       // Logged-in user → remote db.json
-      const userId = JSON.parse(user).id;
+      const userId = Array.isArray(user) ? user[0].id : user.id;
       const productToAdd: Cart = {
         productId: product.id,
         userId: userId,
