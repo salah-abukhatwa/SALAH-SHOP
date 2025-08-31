@@ -1,27 +1,34 @@
-# SALAH SHOP
+# Angular E-Commerce Project
+This is a complete e-commerce web application built with Angular, featuring Seller and User modules. Sellers can manage products while users can browse, search, and purchase seamlessly. The project uses **JSON Server** as the backend for APIs and data.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
+## Key Features
+ **Seller Module**
+- Seller login & signup.
+- Add products with details (name, image, description, category, color, price, discount).
+- Edit, update, or delete products.
+- Seller dashboard for managing products.
 
-## Development server
+ **User Module**
+- User login & signup.
+- Product listing on the homepage.
+- **Search functionality**: Search by name, category, or color with instant results preview.
+- **Product Details**: View full product details and add items to the cart.
+- **Shopping Cart**:
+   - Add/remove products, adjust quantities.
+   - View discounted prices (old price vs. new price).
+   - Cart summary with tax, delivery, discount, and total.
+- **Checkout Page**:
+   - Enter shipping details (address, email, phone).
+   - “Pay on Delivery” option.
+   - Order summary with total calculation.
+- **Orders Page**:
+   - List of all user orders with ID, price, status.
+   - Cancel order option.
+## Technologies
+   - **Angular** (Frontend framework).
+   - **Bootstrap** (UI styling).
+   - **JSON Server** (Mock backend).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+This project was generated with [Angular CLI] version 17.3.7.
