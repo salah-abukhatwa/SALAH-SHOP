@@ -8,9 +8,8 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class ProductService {
-  private apiUrl = environment.apiUrl;
   cartData = new BehaviorSubject<Cart[]>([]);
-
+  private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
   addProduct(data: Product): Observable<Object> {
