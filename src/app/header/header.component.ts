@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { Cart, Product } from '../model/product.model';
@@ -19,7 +25,10 @@ export class HeaderComponent implements OnInit {
   searchResult: Product[] = [];
   cartItem = 0;
 
+  isSidenavOpen = false;
+
   @ViewChild('searchInput') searchInputRef!: ElementRef;
+  @ViewChild('sidenav') sidenavRef!: ElementRef;
 
   constructor(private router: Router, private productService: ProductService) {}
 
@@ -102,6 +111,22 @@ export class HeaderComponent implements OnInit {
       if (this.searchInputRef) {
         this.searchInputRef.nativeElement.value = '';
       }
+    }
+  }
+
+  toggleSidenav() {
+    this.isSidenavOpen = !this.isSidenavOpen;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const clickedInsideSidenav =
+      this.sidenavRef?.nativeElement.contains(target);
+    const clickedHamburger = target.classList.contains('hamburger');
+
+    if (!clickedInsideSidenav && !clickedHamburger) {
+      this.isSidenavOpen = false;
     }
   }
 }

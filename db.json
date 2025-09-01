@@ -109,12 +109,6 @@
       "productId": "bca1",
       "userId": 2,
       "quantity": 1,
-      "id": 3
-    },
-    {
-      "productId": "bca1",
-      "userId": 2,
-      "quantity": 1,
       "id": 4
     },
     {
@@ -122,6 +116,18 @@
       "userId": 2,
       "quantity": 1,
       "id": 5
+    },
+    {
+      "productId": "6e36",
+      "userId": 2,
+      "quantity": 1,
+      "id": 6
+    },
+    {
+      "productId": "g_fSKwZ",
+      "userId": 2,
+      "quantity": 1,
+      "id": 7
     }
   ],
   "orders": [

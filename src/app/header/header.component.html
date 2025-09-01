@@ -1,7 +1,10 @@
 <nav class="nav">
+  <!-- Logo -->
   <div class="logo">
     <a routerLink="/"><img src="assets/logo.png" alt="E-Shop Logo" /></a>
   </div>
+
+  <!-- Search Bar -->
   <div class="nav-search" *ngIf="menuType === 'default' || menuType === 'user'">
     <input
       #searchInput
@@ -21,7 +24,9 @@
       </li>
     </ul>
   </div>
-  <div [ngSwitch]="menuType">
+
+  <!-- Desktop Menu -->
+  <div class="menu" [ngSwitch]="menuType">
     <ng-container *ngSwitchCase="'default'">
       <ul>
         <li><a routerLink="seller-auth">Seller</a></li>
@@ -32,6 +37,7 @@
         </li>
       </ul>
     </ng-container>
+
     <ng-container *ngSwitchCase="'user'">
       <ul>
         <li><a routerLink="seller-auth">Seller</a></li>
@@ -48,6 +54,7 @@
         </li>
       </ul>
     </ng-container>
+
     <ng-container *ngSwitchCase="'seller'">
       <ul>
         <li><a routerLink="seller-dashboard">Dashboard</a></li>
@@ -60,4 +67,56 @@
       </ul>
     </ng-container>
   </div>
+
+  <!-- Hamburger Icon (Mobile) -->
+  <div class="hamburger" (click)="toggleSidenav()">☰</div>
 </nav>
+
+<!-- Side Navigation (Mobile) -->
+<div class="sidenav" [class.open]="isSidenavOpen">
+  <a class="closebtn" (click)="toggleSidenav()">×</a>
+
+  <ul [ngSwitch]="menuType">
+    <ng-container *ngSwitchCase="'default'">
+      <li><a routerLink="seller-auth" (click)="toggleSidenav()">Seller</a></li>
+      <li><a routerLink="" (click)="toggleSidenav()">Home</a></li>
+      <li>
+        <a routerLink="user-auth" (click)="toggleSidenav()">Login/sign-up</a>
+      </li>
+      <li>
+        <a routerLink="cart" (click)="toggleSidenav()">Cart({{ cartItem }})</a>
+      </li>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'user'">
+      <li><a routerLink="seller-auth" (click)="toggleSidenav()">Seller</a></li>
+      <li>
+        <a (click)="toggleSidenav()">{{ userName | titlecase }}</a>
+      </li>
+      <li><a routerLink="" (click)="toggleSidenav()">Home</a></li>
+      <li><a (click)="userLogout(); toggleSidenav()">Logout</a></li>
+      <li><a routerLink="orders" (click)="toggleSidenav()">Orders</a></li>
+      <li>
+        <a [routerLink]="cartItem > 0 ? 'cart' : null" (click)="toggleSidenav()"
+          >Cart({{ cartItem }})</a
+        >
+      </li>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'seller'">
+      <li>
+        <a routerLink="seller-dashboard" (click)="toggleSidenav()">Dashboard</a>
+      </li>
+      <li>
+        <a routerLink="seller-add-product" (click)="toggleSidenav()"
+          >Products</a
+        >
+      </li>
+      <li><a routerLink="seller-home" (click)="toggleSidenav()">List</a></li>
+      <li><a (click)="logout(); toggleSidenav()">Logout</a></li>
+      <li>
+        <a (click)="toggleSidenav()">{{ sellerName | titlecase }}</a>
+      </li>
+    </ng-container>
+  </ul>
+</div>
