@@ -7,6 +7,11 @@ body {
   height: 100%;
   padding-top: 80px;
 }
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
 app-root {
   display: flex;
   flex-direction: column;
@@ -16,7 +21,17 @@ app-root {
   margin-left: 5%;
   margin-right: 5%;
   flex: 1;
+  margin: 0 auto;
+  max-width: 1200px;
 }
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 app-header {
   margin-bottom: 20px;
 }
