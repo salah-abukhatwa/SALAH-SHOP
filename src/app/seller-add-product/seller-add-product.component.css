@@ -1,4 +1,88 @@
-h1,
 .add-product {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   text-align: center;
+}
+
+.add-product h1 {
+  margin-bottom: 15px;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--main-color);
+}
+
+.message-p {
+  text-align: center;
+  color: green;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.common-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-input,
+textarea {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.form-input:focus,
+textarea:focus {
+  border-color: var(--main-color);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-button {
+  background: var(--main-color);
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.form-button:hover {
+  background: #444;
+}
+
+/* ✅ Responsive */
+@media (max-width: 768px) {
+  .add-product {
+    margin: 15px;
+    padding: 20px;
+  }
+
+  .add-product h1 {
+    font-size: 22px;
+  }
+
+  .form-input,
+  textarea {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  .form-button {
+    font-size: 15px;
+    padding: 10px;
+  }
 }

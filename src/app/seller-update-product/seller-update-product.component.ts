@@ -3,11 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { FormsModule } from '@angular/forms';
 import { Product } from '../model/product.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-seller-update-product',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './seller-update-product.component.html',
   styleUrl: './seller-update-product.component.css',
 })

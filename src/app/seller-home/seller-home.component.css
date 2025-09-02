@@ -1,18 +1,139 @@
-table {
-  text-align: left;
+/* Base Styles (same as before) */
+.product-list {
+  padding: 20px;
+}
+
+.product-list h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 600;
   color: var(--main-color);
+  text-align: center;
+}
+
+.message-p {
+  text-align: center;
+  color: green;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+table {
+  width: 100%;
   border-collapse: collapse;
+  font-size: 15px;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
 }
-img {
-  height: 100px;
-  width: 100px;
+
+thead {
+  background: var(--main-color);
+  color: #fff;
 }
-table td,
-table th {
-  border: 1px solid var(--main-color);
-  padding: 10px;
-  min-width: 160pxs;
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 12px 15px;
+  text-align: left;
+  vertical-align: middle;
 }
+
+tbody tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+tbody tr:hover {
+  background: #f1f1f1;
+  transition: background 0.3s ease;
+}
+
+table img {
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+fa-icon {
+  cursor: pointer;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+fa-icon:hover {
+  color: #ff4444;
+}
+
+.adjust-update-link fa-icon:hover {
+  color: #007bff;
+}
+
 .adjust-update-link {
-  margin-left: 10px;
+  margin-left: 12px;
+  text-decoration: none;
+}
+
+/* ✅ Responsive Styling */
+@media (max-width: 992px) {
+  table {
+    font-size: 14px;
+  }
+
+  table img {
+    height: 50px;
+    width: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-list {
+    padding: 10px;
+  }
+
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+    width: 100%;
+  }
+
+  thead {
+    display: none; /* Hide headers on small screens */
+  }
+
+  tbody tr {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px;
+    background: #fff;
+    display: block;
+  }
+
+  tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  tbody td:last-child {
+    border-bottom: none;
+  }
+
+  tbody td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: var(--main-color);
+    flex: 1;
+    margin-right: 10px;
+  }
 }

@@ -75,6 +75,7 @@ carousel-caption {
 .product-footer a {
   text-decoration: none;
   color: var(--main-color);
+  cursor: pointer;
 }
 
 /* ***************************Media Queries*********************************** */

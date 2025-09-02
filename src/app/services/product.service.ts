@@ -124,6 +124,16 @@ export class ProductService {
     return this.http.delete(`${this.apiUrl}/cart/${cartId}`);
   }
 
+  clearCartByUser(userId: number) {
+    return this.http.get<Cart[]>(`${this.apiUrl}/cart?userId=${userId}`).pipe(
+      tap((cartItems) => {
+        cartItems.forEach((item) => {
+          this.http.delete(`${this.apiUrl}/cart/${item.id}`).subscribe();
+        });
+      })
+    );
+  }
+
   calculateCartTotals(cartItems: any[]) {
     let subtotal = 0;
     let discount = 0;

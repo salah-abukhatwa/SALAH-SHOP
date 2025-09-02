@@ -66,8 +66,12 @@ export class ProductDetailsComponent implements OnInit {
       this.removeProduct = true;
     } else {
       // Logged-in user: save to remote cart
-      const userStore = localStorage.getItem('user');
-      const userId = userStore && JSON.parse(userStore)[0]?.id;
+      let user: string | null = null;
+
+      if (typeof localStorage !== 'undefined') {
+        user = localStorage.getItem('user');
+      }
+      const userId = user && JSON.parse(user)?.id;
 
       if (userId) {
         const productToAdd: Cart = {

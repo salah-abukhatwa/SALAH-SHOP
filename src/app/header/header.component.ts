@@ -114,10 +114,6 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  toggleSidenav() {
-    this.isSidenavOpen = !this.isSidenavOpen;
-  }
-
   @HostListener('document:click', ['$event'])
   onClickOutside(event: MouseEvent) {
     const target = event.target as HTMLElement;
@@ -127,6 +123,16 @@ export class HeaderComponent implements OnInit {
 
     if (!clickedInsideSidenav && !clickedHamburger) {
       this.isSidenavOpen = false;
+    }
+  }
+
+  toggleSidenav() {
+    this.isSidenavOpen = !this.isSidenavOpen;
+
+    // Toggle hamburger active class
+    const hamburger = document.querySelector('.hamburger');
+    if (hamburger) {
+      hamburger.classList.toggle('active', this.isSidenavOpen);
     }
   }
 }

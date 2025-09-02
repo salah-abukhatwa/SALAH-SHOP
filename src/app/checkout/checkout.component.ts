@@ -75,28 +75,28 @@ export class CheckoutComponent implements OnInit {
     if (typeof localStorage !== 'undefined') {
       user = localStorage.getItem('user');
     }
-    let userData = user && JSON.parse(user)[0];
+    let userData = user ? JSON.parse(user) : null;
 
     if (this.totalPrice && userData) {
       let orderData: order = {
         ...data,
-        totalPrice: this.totalPrice,
+        totalPrice: this.finalTotal,
         userId: userData.id,
         id: undefined,
       };
 
       this.productService.placeOrder(orderData).subscribe((result) => {
-        console.log('✅ Order placed:', result);
-        alert('Order placed successfully!');
         localStorage.removeItem('cart');
-        this.productService.deleteCartItem(orderData.userId).subscribe(() => {
+        this.productService.clearCartByUser(orderData.userId).subscribe(() => {
           this.productService.cartData.next([]);
           alert('Order placed successfully!');
           this.router.navigate(['/orders']);
         });
       });
     } else {
-      alert('Something went wrong. Please login or check total.');
+      alert(
+        'You need to log in or create an account to complete your purchase.'
+      );
     }
   }
 }

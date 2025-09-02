@@ -1,18 +1,102 @@
 .my-orders {
-  margin-bottom: 100px;
-}
-.my-orders h1 {
-  margin-top: 50px;
-  margin-bottom: 50px;
-  text-align: center;
-}
-.my-orders .order-img {
-  width: 100px;
+  margin: 40px auto 100px;
+  max-width: 1000px;
+  padding: 0 20px;
 }
 
-.my-orders .row {
-  margin-top: 15px;
+.my-orders h1 {
+  margin-bottom: 40px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--main-color);
+}
+
+/* Header (desktop only) */
+.order-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  font-weight: bold;
+  color: var(--main-color);
+  border-bottom: 2px solid #ddd;
+  padding: 10px 0;
   margin-bottom: 15px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #ddd;
+}
+
+/* Each order row */
+.order-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.order-img-box {
+  flex-shrink: 0;
+}
+
+.order-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.order-info {
+  flex: 1;
+}
+
+.order-info p {
+  margin: 5px 0;
+  font-size: 15px;
+}
+
+.form-button {
+  background: var(--main-color);
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 8px;
+  transition: background 0.3s;
+}
+
+.form-button:hover {
+  background: #444;
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .order-header {
+    display: none; /* hide table-style header */
+  }
+
+  .order-row {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+    background: #fafafa;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+
+  .order-img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .order-info {
+    width: 100%;
+  }
+
+  .order-info p {
+    font-size: 14px;
+  }
+
+  .form-button {
+    width: 100%;
+    text-align: center;
+  }
 }

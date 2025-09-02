@@ -15,20 +15,20 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of productList">
-        <td><img src="{{ item.image }}" /></td>
-        <td>{{ item.name }}</td>
-        <td>{{ item.price }}</td>
-        <td>{{ item.color }}</td>
-        <td>{{ item.category }}</td>
-        <td>{{ item.description }}</td>
-        <td>
+        <td data-label="Image"><img src="{{ item.image }}" /></td>
+        <td data-label="Name">{{ item.name }}</td>
+        <td data-label="Price">{{ item.price }}</td>
+        <td data-label="Color">{{ item.color }}</td>
+        <td data-label="Category">{{ item.category }}</td>
+        <td data-label="Description">{{ item.description }}</td>
+        <td data-label="Action">
           <fa-icon (click)="deleteProduct(item.id)" [icon]="icon"></fa-icon>
           <a
             class="adjust-update-link"
             routerLink="/seller-update-product/{{ item.id }}"
           >
-            <fa-icon [icon]="iconEdit"></fa-icon
-          ></a>
+            <fa-icon [icon]="iconEdit"></fa-icon>
+          </a>
         </td>
       </tr>
     </tbody>

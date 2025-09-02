@@ -3,7 +3,7 @@
     {
       "name": "salah",
       "email": "salah@gmail.com",
-      "password": "12345",
+      "password": "123456",
       "id": 1
     }
   ],
@@ -78,74 +78,7 @@
       "id": "9egBiA0"
     }
   ],
-  "users": [
-    {
-      "name": "momo",
-      "email": "momo@gmail.com",
-      "password": "1234",
-      "id": 1
-    },
-    {
-      "name": "salah",
-      "email": "salah@gmail.com",
-      "password": "1234",
-      "id": 2
-    }
-  ],
-  "cart": [
-    {
-      "productId": "bca1",
-      "userId": 1,
-      "quantity": 1,
-      "id": 1
-    },
-    {
-      "productId": "d786",
-      "userId": 1,
-      "quantity": 1,
-      "id": 2
-    },
-    {
-      "productId": "bca1",
-      "userId": 2,
-      "quantity": 1,
-      "id": 4
-    },
-    {
-      "productId": "d786",
-      "userId": 2,
-      "quantity": 1,
-      "id": 5
-    },
-    {
-      "productId": "6e36",
-      "userId": 2,
-      "quantity": 1,
-      "id": 6
-    },
-    {
-      "productId": "g_fSKwZ",
-      "userId": 2,
-      "quantity": 1,
-      "id": 7
-    }
-  ],
-  "orders": [
-    {
-      "address": "turkey/eskishehir",
-      "email": "salah@gmail.com",
-      "contact": "5316793023",
-      "totalPrice": 1300,
-      "userId": 1,
-      "id": 1
-    },
-    {
-      "address": "turkey/eskishehir",
-      "email": "salah@gmail.com",
-      "contact": "5316793023",
-      "totalPrice": 1550,
-      "userId": 1,
-      "id": 3
-    }
-  ]
+  "users": [],
+  "cart": [],
+  "orders": []
 }

@@ -7,7 +7,7 @@
           <img src="{{ item.product?.image }}" alt="" />
         </li>
         <li>
-          <span> {{ item.product?.name }}</span>
+          <span>{{ item.product?.name }}</span>
         </li>
         <li>
           <span>
@@ -16,15 +16,14 @@
               <s>{{ item.product?.price }} $</s>
               <b>
                 {{ (item.product?.price ?? 0) - (item.product?.discount ?? 0) }}
-                $</b
-              >
+                $
+              </b>
             </ng-container>
             <ng-template #noDiscount> {{ item.product?.price }} $ </ng-template>
           </span>
         </li>
-
         <li>
-          <span> Quantity : {{ item.quantity }}</span>
+          <span>Quantity : {{ item.quantity }}</span>
         </li>
         <li>
           <button class="form-button" (click)="removeFromCart(item.id!)">
@@ -33,32 +32,33 @@
         </li>
       </ul>
     </div>
+
+    <!-- Summary -->
     <div class="col-sm-4 summary">
       <h3>Summary</h3>
       <ul>
         <li>
-          <span>Amount:</span> <span>${{ totalPrice }}</span>
+          <span>Amount:</span> <span>${{ totalPrice.toFixed(2) }}</span>
         </li>
         <li>
-          <span>Tax:</span> <span>${{ tax }}</span>
+          <span>Tax:</span> <span>${{ tax.toFixed(2) }}</span>
         </li>
         <li>
-          <span>Delivery:</span> <span>${{ delivery }}</span>
+          <span>Delivery:</span> <span>${{ delivery.toFixed(2) }}</span>
         </li>
         <li>
-          <span>Discount:</span> <span>-${{ discount }}</span>
+          <span>Discount:</span> <span>-${{ discount.toFixed(2) }}</span>
         </li>
         <li>
           <span><h4>Total</h4></span>
           <span
-            ><h4>${{ totalPrice }}</h4></span
+            ><h4>${{ totalPrice.toFixed(2) }}</h4></span
           >
         </li>
-
-        <button (click)="checkout()" class="form-button max-width">
-          Checkout
-        </button>
       </ul>
+      <button (click)="checkout()" class="form-button max-width">
+        Checkout
+      </button>
     </div>
   </div>
 </div>

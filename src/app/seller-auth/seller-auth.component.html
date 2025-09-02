@@ -65,7 +65,13 @@
         ngModel
       />
 
-      <button type="submit" class="form-button">Login</button>
+      <button
+        type="submit"
+        [disabled]="sellerLogin.invalid"
+        class="form-button"
+      >
+        Login
+      </button>
       <p
         style="cursor: pointer"
         class="auth-toogle-link"

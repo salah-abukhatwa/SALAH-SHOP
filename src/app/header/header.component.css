@@ -1,3 +1,10 @@
+/* ================= VARIABLES ================= */
+:root {
+  --main-color: #533a53;
+  --hover-color: #000;
+  --bg-color: #fff;
+}
+
 /* ================= NAVBAR BASE ================= */
 nav {
   display: flex;
@@ -8,32 +15,37 @@ nav {
   top: 0;
   left: 0;
   right: 0;
-  background: #fff;
+  background-color: #fff;
   z-index: 1000;
   border-bottom: 1px solid #ddd;
-  height: auto; /* بدل 60px */
+  height: auto;
+  flex-wrap: wrap;
 }
+
 body {
   padding-top: 80px;
 }
 
 /* ================= LOGO ================= */
 .logo {
-  flex: 0 0 auto; /* fixed size */
+  flex: 0 0 auto;
 }
+
 .logo img {
   width: 100px;
   height: 47px;
   object-fit: cover;
+  transition: width 0.3s;
 }
 
 /* ================= SEARCH ================= */
 .nav-search {
-  flex: 1; /* flexible */
-  max-width: 500px; /* don’t let it push menu */
+  flex: 1;
+  max-width: 500px;
   display: flex;
   align-items: center;
   position: relative;
+  transition: max-width 0.3s;
 }
 
 .nav-search input {
@@ -43,21 +55,31 @@ body {
   height: 35px;
   outline: none;
   padding: 0 10px;
-  appearance: none;
-  background: #fff;
+  background: var(--bg-color);
+  border-radius: 5px;
+  transition: all 0.3s;
 }
 
 .nav-search input:focus {
   border: 2px solid var(--main-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .nav-search button {
   color: var(--main-color);
   border: 1px solid var(--main-color);
-  background: #fff;
+  background: var(--bg-color);
   height: 35px;
   padding: 0 15px;
   cursor: pointer;
+  border-radius: 5px;
+  margin-left: 5px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.nav-search button:hover {
+  background: var(--main-color);
+  color: #fff;
 }
 
 /* ================= SEARCH RESULTS ================= */
@@ -66,14 +88,16 @@ body {
   top: 40px;
   left: 0;
   z-index: 1000;
-  background-color: #fff;
+  background-color: var(--bg-color);
   width: 100%;
   max-height: 250px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  border: 1px solid #ddd;
+  border: 1px 0 solid #ddd;
   border-top: none;
+  border-radius: 0 0 5px 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .search-results li {
@@ -94,7 +118,7 @@ body {
 
 /* ================= DESKTOP MENU ================= */
 .menu {
-  flex: 0 0 auto; /* fixed size */
+  flex: 0 0 auto;
 }
 
 .menu ul {
@@ -104,33 +128,55 @@ body {
   margin: 0;
   padding: 0;
   list-style: none;
-  white-space: nowrap; /* prevent wrapping under search */
+  white-space: nowrap;
 }
 
 .menu ul li a {
   text-decoration: none;
   color: var(--main-color);
+  font-weight: 500;
+  transition: color 0.3s;
 }
+
 .menu ul li a:hover {
-  color: #000;
-  cursor: pointer;
+  color: var(--hover-color);
 }
+
 .menu ul li a.active {
   color: #533a53;
+  font-weight: 600;
 }
 
 /* ================= HAMBURGER (MOBILE) ================= */
 .hamburger {
   display: none;
-  flex-direction: column;
   cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  padding: 5px;
+  transition: all 0.3s;
 }
+
 .hamburger span {
   height: 3px;
   width: 25px;
   background: var(--main-color);
   margin: 4px 0;
-  transition: 0.4s;
+  border-radius: 2px;
+  transition: all 0.4s;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
 }
 
 /* ================= SIDENAV ================= */
@@ -140,16 +186,19 @@ body {
   position: fixed;
   top: 0;
   right: 0;
-  background-color: #fff;
+  background: #fff;
+  box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
   border-left: 1px solid #ddd;
   overflow-x: hidden;
-  transition: 0.3s;
+  transition: width 0.3s ease-in-out;
   z-index: 2000;
   padding-top: 60px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
 
 .sidenav.open {
-  width: 250px;
+  width: 220px;
 }
 
 .sidenav ul {
@@ -160,18 +209,72 @@ body {
 }
 
 .sidenav ul li {
-  padding: 15px 20px;
-  border-bottom: 1px solid #eee;
+  padding: 15px 25px;
+  border-bottom: 1px solid #f0f0f0;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: background 0.3s, padding-left 0.3s, opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.sidenav.open ul li {
+  opacity: 1;
+  transform: translateX(0);
+}
+.sidenav.open ul li:nth-child(1) {
+  transition-delay: 0.05s;
+}
+.sidenav.open ul li:nth-child(2) {
+  transition-delay: 0.1s;
+}
+.sidenav.open ul li:nth-child(3) {
+  transition-delay: 0.15s;
+}
+.sidenav.open ul li:nth-child(4) {
+  transition-delay: 0.2s;
+}
+.sidenav.open ul li:nth-child(5) {
+  transition-delay: 0.25s;
+}
+.sidenav.open ul li:nth-child(6) {
+  transition-delay: 0.3s;
 }
 
 .sidenav ul li a {
   color: var(--main-color);
   text-decoration: none;
+  font-weight: 500;
   display: block;
+  transition: color 0.3s;
 }
 
-.sidenav ul li a:hover {
-  background: #f5f5f5;
+.sidenav ul li:hover {
+  background-color: #f9f9f9;
+  padding-left: 30px;
+}
+
+.sidenav ul li a.active {
+  color: #533a53;
+  font-weight: 600;
+}
+
+/* ================= SIDENAV OVERLAY ================= */
+.sidenav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.sidenav-overlay.active {
+  opacity: 1;
+  pointer-events: all;
 }
 
 /* ================= RESPONSIVE ================= */
@@ -179,25 +282,19 @@ body {
   nav .menu {
     display: none;
   }
-
-  /* Show hamburger */
   .hamburger {
     display: flex;
   }
-
   .nav-search {
     flex: 1;
     margin: 0 10px;
-    max-width: 60%;
+    max-width: 65%;
   }
-
   .nav-search input {
     width: 100%;
-    max-width: 100%;
   }
-
   .logo img {
-    width: 80px;
+    width: 70px;
     height: auto;
   }
 }
@@ -206,7 +303,6 @@ body {
   nav {
     padding: 8px 10px;
   }
-
   .logo img {
     width: 60px;
     height: auto;
@@ -215,7 +311,6 @@ body {
     height: 32px;
     font-size: 14px;
   }
-
   .nav-search button {
     height: 32px;
     font-size: 14px;
