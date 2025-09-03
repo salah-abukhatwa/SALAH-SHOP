@@ -29,9 +29,9 @@
   <div class="menu" [ngSwitch]="menuType">
     <ng-container *ngSwitchCase="'default'">
       <ul>
+        <li><a routerLink="user-auth">Login</a></li>
         <li><a routerLink="seller-auth">Seller</a></li>
         <li><a routerLink="">Home</a></li>
-        <li><a routerLink="user-auth">Login/sign-up</a></li>
         <li>
           <a routerLink="cart">Cart({{ cartItem }})</a>
         </li>
@@ -45,15 +45,14 @@
             <i class="fa-solid fa-user"></i> {{ userName | titlecase }}
           </a>
         </li>
-        <li><a routerLink="seller-auth">Seller</a></li>
         <li><a routerLink="">Home</a></li>
-        <li><a (click)="userLogout()">Logout</a></li>
         <li><a routerLink="orders">Orders</a></li>
         <li>
           <a [routerLink]="cartItem > 0 ? 'cart' : null"
             >Cart({{ cartItem }})</a
           >
         </li>
+        <li><a (click)="userLogout()">Logout</a></li>
       </ul>
     </ng-container>
 
@@ -64,10 +63,10 @@
             <i class="fa-solid fa-user"></i> {{ sellerName | titlecase }}
           </a>
         </li>
-        <li><a routerLink="seller-dashboard">Dashboard</a></li>
         <li><a routerLink="seller-add-product">Products</a></li>
         <li><a routerLink="seller-home">List</a></li>
         <li><a (click)="logout()">Logout</a></li>
+        <!-- <li><a routerLink="seller-dashboard">Dashboard</a></li> -->
       </ul>
     </ng-container>
   </div>
@@ -81,11 +80,12 @@
 
   <ul [ngSwitch]="menuType">
     <ng-container *ngSwitchCase="'default'">
+      <li>
+        <a routerLink="user-auth" (click)="toggleSidenav()">Login</a>
+      </li>
       <li><a routerLink="seller-auth" (click)="toggleSidenav()">Seller</a></li>
       <li><a routerLink="" (click)="toggleSidenav()">Home</a></li>
-      <li>
-        <a routerLink="user-auth" (click)="toggleSidenav()">Login/sign-up</a>
-      </li>
+
       <li>
         <a routerLink="cart" (click)="toggleSidenav()">Cart({{ cartItem }})</a>
       </li>
@@ -97,16 +97,14 @@
           <i class="fa-solid fa-user"></i> {{ userName | titlecase }}
         </a>
       </li>
-
-      <li><a routerLink="seller-auth" (click)="toggleSidenav()">Seller</a></li>
       <li><a routerLink="" (click)="toggleSidenav()">Home</a></li>
-      <li><a (click)="userLogout(); toggleSidenav()">Logout</a></li>
       <li><a routerLink="orders" (click)="toggleSidenav()">Orders</a></li>
       <li>
         <a [routerLink]="cartItem > 0 ? 'cart' : null" (click)="toggleSidenav()"
           >Cart({{ cartItem }})</a
         >
       </li>
+      <li><a (click)="userLogout(); toggleSidenav()">Logout</a></li>
     </ng-container>
 
     <ng-container *ngSwitchCase="'seller'">
@@ -115,9 +113,9 @@
           <i class="fa-solid fa-user"></i> {{ sellerName | titlecase }}
         </a>
       </li>
-      <li>
+      <!-- <li>
         <a routerLink="seller-dashboard" (click)="toggleSidenav()">Dashboard</a>
-      </li>
+      </li> -->
       <li>
         <a routerLink="seller-add-product" (click)="toggleSidenav()"
           >Products</a
