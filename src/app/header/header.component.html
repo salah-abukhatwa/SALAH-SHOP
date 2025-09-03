@@ -68,13 +68,12 @@
     </ng-container>
   </div>
 
-  <!-- Hamburger Icon (Mobile) -->
   <div class="hamburger" (click)="toggleSidenav()">☰</div>
 </nav>
 
 <!-- Side Navigation (Mobile) -->
 <div class="sidenav" [class.open]="isSidenavOpen">
-  <a class="closebtn" (click)="toggleSidenav()">×</a>
+  <button class="closebtn" (click)="toggleSidenav()">✕</button>
 
   <ul [ngSwitch]="menuType">
     <ng-container *ngSwitchCase="'default'">

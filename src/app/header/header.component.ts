@@ -35,6 +35,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe((val: any) => {
       this.updateMenuAndCart();
+      this.searchResult = [];
+      if (this.searchInputRef) {
+        this.searchInputRef.nativeElement.value = ''; // 👈 clear input
+      }
     });
 
     // Initial load
@@ -117,12 +121,26 @@ export class HeaderComponent implements OnInit {
   @HostListener('document:click', ['$event'])
   onClickOutside(event: MouseEvent) {
     const target = event.target as HTMLElement;
+
+    // --- Sidenav logic ---
     const clickedInsideSidenav =
       this.sidenavRef?.nativeElement.contains(target);
     const clickedHamburger = target.classList.contains('hamburger');
 
     if (!clickedInsideSidenav && !clickedHamburger) {
       this.isSidenavOpen = false;
+    }
+
+    // --- Search results logic ---
+    const clickedInsideSearch =
+      this.searchInputRef?.nativeElement.contains(target) ||
+      target.closest('.search-results');
+
+    if (!clickedInsideSearch) {
+      this.searchResult = [];
+      if (this.searchInputRef) {
+        this.searchInputRef.nativeElement.value = '';
+      }
     }
   }
 
