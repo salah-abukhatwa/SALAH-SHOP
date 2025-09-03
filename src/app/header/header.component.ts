@@ -56,12 +56,11 @@ export class HeaderComponent implements OnInit {
       const userStore = localStorage.getItem('user');
 
       if (sellerStore && this.router.url.includes('seller')) {
-        const sellerData = JSON.parse(sellerStore)[0];
+        const sellerData = JSON.parse(sellerStore);
         this.sellerName = sellerData?.name || '';
         this.menuType = 'seller';
       } else if (userStore) {
-        const parsed = JSON.parse(userStore);
-        const userData = Array.isArray(parsed) ? parsed[0] : parsed;
+        const userData = JSON.parse(userStore);
         this.userName = userData?.name || '';
         this.menuType = 'user';
 

@@ -283,6 +283,29 @@ body {
   transform: scale(1.1);
 }
 
+.username-link,
+.username-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 25px;
+  background: linear-gradient(145deg, #ffffff, #e6e6e6);
+  box-shadow: 3px 3px 6px #c1c1c1, -3px -3px 6px #ffffff;
+  font-weight: 600;
+  color: #333;
+  transition: all 0.25s ease-in-out;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.username-link i,
+.username-link i {
+  /* margin-right: 6px; */
+  font-size: 1rem;
+  color: #533a53;
+}
+
 /* ================= SIDENAV OVERLAY ================= */
 .sidenav-overlay {
   position: fixed;
@@ -294,7 +317,7 @@ body {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease;
-  z-index: 1500; /* just under sidenav */
+  z-index: 1500;
 }
 
 .sidenav-overlay.active {

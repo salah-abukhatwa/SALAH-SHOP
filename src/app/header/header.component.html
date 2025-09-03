@@ -40,10 +40,12 @@
 
     <ng-container *ngSwitchCase="'user'">
       <ul>
-        <li><a routerLink="seller-auth">Seller</a></li>
         <li>
-          <a>{{ userName | titlecase }}</a>
+          <a class="username-link">
+            <i class="fa-solid fa-user"></i> {{ userName | titlecase }}
+          </a>
         </li>
+        <li><a routerLink="seller-auth">Seller</a></li>
         <li><a routerLink="">Home</a></li>
         <li><a (click)="userLogout()">Logout</a></li>
         <li><a routerLink="orders">Orders</a></li>
@@ -57,13 +59,15 @@
 
     <ng-container *ngSwitchCase="'seller'">
       <ul>
+        <li>
+          <a class="sellerName">
+            <i class="fa-solid fa-user"></i> {{ sellerName | titlecase }}
+          </a>
+        </li>
         <li><a routerLink="seller-dashboard">Dashboard</a></li>
         <li><a routerLink="seller-add-product">Products</a></li>
         <li><a routerLink="seller-home">List</a></li>
         <li><a (click)="logout()">Logout</a></li>
-        <li>
-          <a>{{ sellerName | titlecase }}</a>
-        </li>
       </ul>
     </ng-container>
   </div>
@@ -88,10 +92,13 @@
     </ng-container>
 
     <ng-container *ngSwitchCase="'user'">
-      <li><a routerLink="seller-auth" (click)="toggleSidenav()">Seller</a></li>
       <li>
-        <a (click)="toggleSidenav()">{{ userName | titlecase }}</a>
+        <a (click)="toggleSidenav()" class="username-link">
+          <i class="fa-solid fa-user"></i> {{ userName | titlecase }}
+        </a>
       </li>
+
+      <li><a routerLink="seller-auth" (click)="toggleSidenav()">Seller</a></li>
       <li><a routerLink="" (click)="toggleSidenav()">Home</a></li>
       <li><a (click)="userLogout(); toggleSidenav()">Logout</a></li>
       <li><a routerLink="orders" (click)="toggleSidenav()">Orders</a></li>
@@ -104,6 +111,11 @@
 
     <ng-container *ngSwitchCase="'seller'">
       <li>
+        <a (click)="toggleSidenav()" class="username-link">
+          <i class="fa-solid fa-user"></i> {{ sellerName | titlecase }}
+        </a>
+      </li>
+      <li>
         <a routerLink="seller-dashboard" (click)="toggleSidenav()">Dashboard</a>
       </li>
       <li>
@@ -113,9 +125,6 @@
       </li>
       <li><a routerLink="seller-home" (click)="toggleSidenav()">List</a></li>
       <li><a (click)="logout(); toggleSidenav()">Logout</a></li>
-      <li>
-        <a (click)="toggleSidenav()">{{ sellerName | titlecase }}</a>
-      </li>
     </ng-container>
   </ul>
 </div>
