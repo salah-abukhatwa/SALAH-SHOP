@@ -78,7 +78,14 @@
       "id": "9egBiA0"
     }
   ],
-  "users": [],
+  "users": [
+    {
+      "name": "salah",
+      "email": "salah@gmail.com",
+      "password": "123456",
+      "id": 1
+    }
+  ],
   "cart": [],
   "orders": []
 }
