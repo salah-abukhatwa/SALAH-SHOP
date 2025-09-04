@@ -135,6 +135,7 @@ body {
   color: var(--main-color);
   font-weight: 500;
   transition: color 0.3s;
+  cursor: pointer;
 }
 
 .menu ul li a:hover {
