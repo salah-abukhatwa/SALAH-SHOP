@@ -90,8 +90,21 @@
       "email": "salah@gmail.com",
       "password": "123456",
       "id": 1
+    },
+    {
+      "name": "xx",
+      "email": "xxx@",
+      "password": "111111",
+      "id": 2
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "productId": "bca1",
+      "userId": 1,
+      "quantity": 1,
+      "id": 1
+    }
+  ],
   "orders": []
 }
