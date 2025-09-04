@@ -81,7 +81,7 @@ export class ProductService {
     }
   }
   addToCart(cartData: Cart) {
-    return this.http.post('http://localhost:3000/cart', cartData).pipe(
+    return this.http.post(`${this.apiUrl}/cart`, cartData).pipe(
       tap(() => {
         if (cartData.userId) {
           this.updateCartCountFromRemote(cartData.userId);
