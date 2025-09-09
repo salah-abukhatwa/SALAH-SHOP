@@ -1,9 +1,11 @@
 :root {
   --main-color: #0068d4;
+  --main-font: "Roboto", sans-serif;
 }
 
 body {
   font-family: sans-serif;
+
   height: 100%;
   padding-top: 80px;
 }
