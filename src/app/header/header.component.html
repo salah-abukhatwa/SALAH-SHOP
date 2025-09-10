@@ -33,7 +33,10 @@
         <li><a routerLink="seller-auth">Seller</a></li>
         <li><a routerLink="">Home</a></li>
         <li>
-          <a routerLink="cart">Cart({{ cartItem }})</a>
+          <a routerLink="cart" class="cart-link">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-badge" *ngIf="cartItem > 0">{{ cartItem }}</span>
+          </a>
         </li>
       </ul>
     </ng-container>
@@ -48,10 +51,12 @@
         <li><a routerLink="">Home</a></li>
         <li><a routerLink="orders">Orders</a></li>
         <li>
-          <a [routerLink]="cartItem > 0 ? 'cart' : null"
-            >Cart({{ cartItem }})</a
-          >
+          <a routerLink="cart" class="cart-link">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-badge" *ngIf="cartItem > 0">{{ cartItem }}</span>
+          </a>
         </li>
+
         <li><a (click)="userLogout()">Logout</a></li>
       </ul>
     </ng-container>
@@ -87,7 +92,10 @@
       <li><a routerLink="" (click)="toggleSidenav()">Home</a></li>
 
       <li>
-        <a routerLink="cart" (click)="toggleSidenav()">Cart({{ cartItem }})</a>
+        <a routerLink="cart" class="cart-link">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-badge" *ngIf="cartItem > 0">{{ cartItem }}</span>
+        </a>
       </li>
     </ng-container>
 
@@ -100,10 +108,12 @@
       <li><a routerLink="" (click)="toggleSidenav()">Home</a></li>
       <li><a routerLink="orders" (click)="toggleSidenav()">Orders</a></li>
       <li>
-        <a [routerLink]="cartItem > 0 ? 'cart' : null" (click)="toggleSidenav()"
-          >Cart({{ cartItem }})</a
-        >
+        <a routerLink="cart" class="cart-link">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-badge" *ngIf="cartItem > 0">{{ cartItem }}</span>
+        </a>
       </li>
+
       <li><a (click)="userLogout(); toggleSidenav()">Logout</a></li>
     </ng-container>
 
