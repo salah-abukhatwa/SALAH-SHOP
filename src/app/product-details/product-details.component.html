@@ -1,40 +1,47 @@
-<div class="row product-details" *ngIf="productData">
+<div class="row product-details-page" *ngIf="productData">
   <div class="col-sm-6">
     <img class="product-img" src="{{ productData.image }}" alt="" />
   </div>
   <div class="col-sm-6">
-    <div class="details">
-      <h1>{{ productData.name }}</h1>
-      <h3>Price : {{ productData.price }}</h3>
-      <div class="color">
-        Color :
-        <h3
-          [style.backgroundColor]="productData.color"
-          class="product-color"
-        ></h3>
-      </div>
-      <h6>Category : {{ productData.category }}</h6>
-      <h6>Description : {{ productData.description }}</h6>
-      <button class="form-button">Buy Now</button>
-      <button
-        class="form-button"
-        *ngIf="removeProduct && isGuestUser"
-        (click)="removeFromCart()"
-      >
-        Remove from Cart
-      </button>
-      <button
-        class="form-button"
-        *ngIf="!removeProduct || !isGuestUser"
-        (click)="addToCart()"
-      >
-        Add to Cart
-      </button>
+    <div class="details-card">
+      <div class="details">
+        <h1 class="product-name">{{ productData.name }}</h1>
+        <h3 class="product-price">Price : {{ productData.price }}</h3>
+        <div class="color-group">
+          Color :
+          <h3
+            [style.backgroundColor]="productData.color"
+            class="product-color"
+          ></h3>
+        </div>
+        <h6 class="product-category">Category : {{ productData.category }}</h6>
+        <p class="product-description">
+          {{ productData.description }}
+        </p>
 
-      <div class="quantity-group">
-        <button (click)="handleQuantity('minus')">-</button>
-        <input type="number" [(ngModel)]="productQuantity" />
-        <button (click)="handleQuantity('plus')">+</button>
+        <div class="quantity-group">
+          <button (click)="handleQuantity('minus')">-</button>
+          <input type="number" [(ngModel)]="productQuantity" />
+          <button (click)="handleQuantity('plus')">+</button>
+        </div>
+
+        <div class="action-buttons">
+          <button class="form-button buy-now">Buy Now</button>
+          <button
+            class="form-button remove-btn"
+            *ngIf="removeProduct && isGuestUser"
+            (click)="removeFromCart()"
+          >
+            Remove from Cart
+          </button>
+          <button
+            class="form-button"
+            *ngIf="!removeProduct || !isGuestUser"
+            (click)="addToCart()"
+          >
+            Add to Cart
+          </button>
+        </div>
       </div>
     </div>
   </div>

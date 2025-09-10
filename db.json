@@ -98,13 +98,6 @@
       "id": 2
     }
   ],
-  "cart": [
-    {
-      "productId": "bca1",
-      "userId": 1,
-      "quantity": 1,
-      "id": 1
-    }
-  ],
+  "cart": [],
   "orders": []
 }

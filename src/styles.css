@@ -4,21 +4,23 @@
 }
 
 body {
-  font-family: sans-serif;
-
+  font-family: var(--main-font), sans-serif;
   height: 100%;
   padding-top: 80px;
 }
+
 html,
 body {
   width: 100%;
   overflow-x: hidden;
 }
+
 app-root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
+
 .container {
   margin-left: 5%;
   margin-right: 5%;
@@ -37,15 +39,19 @@ video {
 app-header {
   margin-bottom: 20px;
 }
+
 app-footer {
   margin-top: auto;
 }
+
+/* === Forms === */
 .common-form {
   display: flex;
   flex-direction: column;
   width: 300px;
   margin: auto;
 }
+
 .form-input {
   height: 35px;
   margin-bottom: 20px;
@@ -53,12 +59,36 @@ app-footer {
   padding-left: 15px;
   color: var(--main-color);
 }
+
 .form-button {
-  height: 35px;
+  height: auto;
   border: 1px solid var(--main-color);
   color: var(--main-color);
   cursor: pointer;
+  padding: 5px 20px;
+  border-radius: 5px;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
 }
+
+.form-button:hover {
+  background-color: var(--main-color);
+  color: #fff;
+}
+
+/* === Global Button Style === */
+button {
+  padding: 5px 20px;
+  border: 1px solid var(--main-color);
+  color: var(--main-color);
+  background-color: #fff;
+  border-radius: 14px;
+
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+/* === Messages === */
 .error-p {
   color: red;
 }
@@ -68,24 +98,55 @@ app-footer {
   text-align: center;
 }
 
+/* === Carousel === */
 .carousel-caption {
   background-color: #0000007d;
   border-radius: 10px;
+  padding: 10px 20px;
+  max-width: 80%;
+  margin: 0 auto;
 }
+
 .carousel-control-next-icon,
 .carousel-control-prev-icon {
-  background-color: black;
+  background-color: var(--main-color);
   border-radius: 5px;
 }
 
+.carousel-indicators [data-bs-target] {
+  background-color: #fff;
+}
+
+/* === Validation === */
 .invalid-input {
   color: red;
   font-size: 12px;
   margin-top: -20px;
 }
+
 button:disabled {
   cursor: not-allowed;
 }
+
 .max-width {
   width: 100%;
+}
+
+.price-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
+.price-section .original-price {
+  text-decoration: line-through;
+  color: #888;
+  font-size: 14px;
+}
+
+.price-section .discount-price {
+  color: var(--main-color);
+  font-weight: bold;
+  font-size: 16px;
 }
