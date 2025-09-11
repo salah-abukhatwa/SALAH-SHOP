@@ -1,7 +1,7 @@
 .cart-page {
   margin-top: 40px;
   margin-bottom: 50px;
-  background: #f9fafc; /* light modern background */
+  background: #f9fafc;
   padding: 20px;
   border-radius: 10px;
 }
@@ -66,7 +66,6 @@ details ul li .form-button {
   background: #0056b3;
 }
 
-/* ===== Price Section ===== */
 .price-wrapper {
   display: flex;
   justify-content: center;
@@ -88,7 +87,6 @@ details ul li .form-button {
   font-size: 16px;
 }
 
-/* ===== Summary ===== */
 .summary {
   border: 1px solid #ddd;
   border-radius: 10px;
@@ -126,7 +124,6 @@ details ul li .form-button {
   margin-top: 10px;
 }
 
-/* ===== Buttons (same style as home page) ===== */
 .form-button {
   margin-top: 15px;
   padding: 5px 20px;
@@ -151,7 +148,6 @@ details ul li .form-button {
   width: 100%;
 }
 
-/* ===== Responsive ===== */
 @media (max-width: 992px) {
   .cart-page .row {
     display: flex;
@@ -202,7 +198,7 @@ details ul li .form-button {
 @media (max-width: 480px) {
   .cart-page {
     padding: 15px;
-    background: #eef2f7; /* stronger bg for mobile */
+    background: #eef2f7;
   }
 
   .details img {

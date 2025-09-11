@@ -37,14 +37,12 @@ export class HeaderComponent implements OnInit {
       this.updateMenuAndCart();
       this.searchResult = [];
       if (this.searchInputRef) {
-        this.searchInputRef.nativeElement.value = ''; // 👈 clear input
+        this.searchInputRef.nativeElement.value = '';
       }
     });
 
-    // Initial load
     this.updateMenuAndCart();
 
-    // Subscribe to cart changes
     this.productService.cartData.subscribe((cart: Cart[]) => {
       this.cartItem = cart.length;
     });
@@ -130,7 +128,6 @@ export class HeaderComponent implements OnInit {
       this.isSidenavOpen = false;
     }
 
-    // --- Search results logic ---
     const clickedInsideSearch =
       this.searchInputRef?.nativeElement.contains(target) ||
       target.closest('.search-results');
@@ -146,7 +143,6 @@ export class HeaderComponent implements OnInit {
   toggleSidenav() {
     this.isSidenavOpen = !this.isSidenavOpen;
 
-    // Toggle hamburger active class
     const hamburger = document.querySelector('.hamburger');
     if (hamburger) {
       hamburger.classList.toggle('active', this.isSidenavOpen);

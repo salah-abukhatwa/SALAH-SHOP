@@ -1,10 +1,8 @@
 <nav class="nav">
-  <!-- Logo -->
   <div class="logo">
     <a routerLink="/"><img src="assets/logo.png" alt="E-Shop Logo" /></a>
   </div>
 
-  <!-- Search Bar -->
   <div class="nav-search" *ngIf="menuType === 'default' || menuType === 'user'">
     <input
       #searchInput
@@ -25,7 +23,6 @@
     </ul>
   </div>
 
-  <!-- Desktop Menu -->
   <div class="menu" [ngSwitch]="menuType">
     <ng-container *ngSwitchCase="'default'">
       <ul>
