@@ -2,6 +2,7 @@
   font-family: var(--main-font);
   color: #333;
   margin: 50px 0 80px;
+  margin-top: 15px;
 }
 
 .container {
@@ -179,7 +180,13 @@
 }
 
 @media (max-width: 576px) {
+  .container {
+    flex: 1;
+    margin: -30px auto;
+  }
+
   .product-img {
     max-height: 250px;
+    margin-bottom: 15px;
   }
 }

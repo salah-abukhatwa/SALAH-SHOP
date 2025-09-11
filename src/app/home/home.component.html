@@ -21,12 +21,9 @@
 </ngb-carousel>
 <div class="product-list-wrapper">
   <h1>Trendy Products</h1>
-  <div class="row">
-    <div
-      class="col-lg-3 col-md-6 col-12"
-      *ngFor="let product of trendyProducts"
-    >
-      <div class="product-item">
+  <div class="row g-4">
+    <div class="col-lg-3 col-md-6 col-6" *ngFor="let product of trendyProducts">
+      <div class="product-item h-100">
         <img src="{{ product.image }}" alt="" />
         <div class="product-details">
           <h6 class="name-head">{{ product.name }}</h6>

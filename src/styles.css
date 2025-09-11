@@ -22,8 +22,6 @@ app-root {
 }
 
 .container {
-  margin-left: 5%;
-  margin-right: 5%;
   flex: 1;
   margin: 0 auto;
   max-width: 1200px;

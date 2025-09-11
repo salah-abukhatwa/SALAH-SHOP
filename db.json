@@ -98,6 +98,25 @@
       "id": 2
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "productId": "bca1",
+      "userId": 1,
+      "quantity": 1,
+      "id": 1
+    },
+    {
+      "productId": "bca1",
+      "userId": 1,
+      "quantity": 1,
+      "id": 2
+    },
+    {
+      "productId": "bca1",
+      "userId": 1,
+      "quantity": 1,
+      "id": 3
+    }
+  ],
   "orders": []
 }
