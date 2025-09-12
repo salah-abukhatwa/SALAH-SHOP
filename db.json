@@ -1,29 +1,6 @@
 {
-  "seller": [
-    {
-      "name": "salah",
-      "email": "salah@gmail.com",
-      "password": "123456",
-      "id": 1
-    },
-    {
-      "name": "nor",
-      "email": "nor@gmail.com",
-      "password": "123456",
-      "id": 2
-    }
-  ],
+  "seller": [],
   "products": [
-    {
-      "id": "bca1",
-      "name": "Iphone 15 pro max",
-      "price": 1550,
-      "color": "gray",
-      "category": "mobile",
-      "image": "https://i5.walmartimages.com/asr/3754aed1-51d7-4fee-9619-18ff48e3656c.648f35abffedf1efd5149cae0895ffb9.jpeg?odnHeight=580&odnWidth=580&odnBg=FFFFFF",
-      "description": " iPhone 15 Pro Max, RAM Capacity: 8 GB, Internal Memory: 256 GB, Screen Size: 6.7 inches, Battery Capacity: 4422 mAh, Release Year: 2023",
-      "discount": 6
-    },
     {
       "id": "0b6e",
       "name": "samsung Galaxy S24 Ultra",
@@ -74,6 +51,16 @@
       "id": "g_fSKwZ"
     },
     {
+      "id": "bca1",
+      "name": "Iphone 15 pro max",
+      "price": 1550,
+      "color": "gray",
+      "category": "mobile",
+      "image": "https://i5.walmartimages.com/asr/3754aed1-51d7-4fee-9619-18ff48e3656c.648f35abffedf1efd5149cae0895ffb9.jpeg?odnHeight=580&odnWidth=580&odnBg=FFFFFF",
+      "description": " iPhone 15 Pro Max, RAM Capacity: 8 GB, Internal Memory: 256 GB, Screen Size: 6.7 inches, Battery Capacity: 4422 mAh, Release Year: 2023",
+      "discount": 6
+    },
+    {
       "name": "EasySMX 2.4G",
       "price": 35.9,
       "category": "headset ",
@@ -84,39 +71,7 @@
       "id": "9egBiA0"
     }
   ],
-  "users": [
-    {
-      "name": "salah",
-      "email": "salah@gmail.com",
-      "password": "123456",
-      "id": 1
-    },
-    {
-      "name": "xx",
-      "email": "xxx@",
-      "password": "111111",
-      "id": 2
-    }
-  ],
-  "cart": [
-    {
-      "productId": "bca1",
-      "userId": 1,
-      "quantity": 1,
-      "id": 1
-    },
-    {
-      "productId": "bca1",
-      "userId": 1,
-      "quantity": 1,
-      "id": 2
-    },
-    {
-      "productId": "bca1",
-      "userId": 1,
-      "quantity": 1,
-      "id": 3
-    }
-  ],
+  "users": [],
+  "cart": [],
   "orders": []
 }

@@ -45,14 +45,16 @@
 /* ================= Product Card ================= */
 
 .product-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   margin: 10px 0;
   border: 1px solid #eee;
   border-radius: 25px;
   overflow: hidden;
   background: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  display: flex;
-  flex-direction: column;
+
   height: 100%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -74,6 +76,10 @@
 }
 
 .product-item .product-details {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
   padding: 10px; /* smaller */
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
@@ -100,6 +106,7 @@
 .product-item .product-footer {
   display: flex;
   justify-content: space-between;
+  margin-top: auto;
   padding: 8px 10px;
   background: #fff;
   transition: background 0.3s ease;
