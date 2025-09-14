@@ -10,6 +10,7 @@ import { Component, HostListener } from '@angular/core';
 })
 export class FooterComponent {
   showGoUp: boolean = false;
+  date: number = new Date().getFullYear();
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
