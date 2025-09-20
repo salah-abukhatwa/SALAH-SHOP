@@ -1,3 +1,48 @@
+.loader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+.loader {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(0, 104, 212, 0.2) 40%,
+    rgba(0, 104, 212, 0.4) 98%,
+    var(--main-color) 100%
+  );
+  border-radius: 50%;
+  position: relative;
+}
+
+.loader:before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  border-bottom: 0 solid transparent;
+  box-shadow: 0 -10px 20px 20px rgba(0, 104, 212, 0.15) inset,
+    0 -5px 15px 10px rgba(0, 104, 212, 0.25) inset,
+    0 -2px 5px rgba(0, 104, 212, 0.35) inset,
+    0 -3px 2px rgba(0, 104, 212, 0.45) inset, 0 2px 0 var(--main-color),
+    0 2px 3px rgba(0, 104, 212, 0.55), 0 5px 5px rgba(0, 104, 212, 0.35),
+    0 10px 15px rgba(0, 104, 212, 0.25),
+    0 10px 20px 20px rgba(0, 104, 212, 0.15);
+  filter: blur(3px);
+  animation: 2s rotate linear infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .product-details-page {
   font-family: var(--main-font);
   color: #333;

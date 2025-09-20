@@ -17,6 +17,7 @@ export class ProductDetailsComponent implements OnInit {
   productQuantity: number = 1;
   removeProduct: boolean = false;
   isGuestUser = true;
+  loading = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,6 +35,7 @@ export class ProductDetailsComponent implements OnInit {
     if (productId) {
       this.productService.getProduct(productId).subscribe((data: Product) => {
         this.productData = data;
+        this.loading = false;
 
         if (typeof localStorage !== 'undefined') {
           const cart = JSON.parse(localStorage.getItem('cart') || '[]');

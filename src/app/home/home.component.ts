@@ -16,15 +16,26 @@ export class HomeComponent implements OnInit {
   products: Product[] = [];
   popularProducts: Product[] = [];
   trendyProducts: Product[] = [];
-
+  loading = true;
   constructor(private productService: ProductService) {}
 
   ngOnInit() {
+    let requestsDone = 0;
+
+    const checkLoading = () => {
+      requestsDone++;
+      if (requestsDone === 2) {
+        this.loading = false;
+      }
+    };
+
     this.productService.popularProducts().subscribe((data) => {
       this.popularProducts = data;
+      checkLoading();
     });
     this.productService.trendyProducts().subscribe((data) => {
       this.trendyProducts = data;
+      checkLoading();
     });
     this.productService.productList().subscribe((data) => {
       this.products = data;

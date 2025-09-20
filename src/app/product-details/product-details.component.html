@@ -1,4 +1,8 @@
-<div class="row product-details-page" *ngIf="productData">
+<div class="loader-wrapper" *ngIf="loading">
+  <span class="loader"></span>
+</div>
+
+<div class="row product-details-page" *ngIf="!loading && productData">
   <div class="col-sm-6">
     <img class="product-img" src="{{ productData.image }}" alt="" />
   </div>

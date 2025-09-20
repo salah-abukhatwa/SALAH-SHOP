@@ -1,47 +1,56 @@
-@if (popularProducts) {
-<ngb-carousel>
-  <ng-template
-    class="template"
-    *ngFor="let product of popularProducts"
-    ngbSlide
-  >
-    <div class="picsum-img-wrapper">
-      <a routerLink="/details/{{ product.id }}">
-        <img
-          class="product-image"
-          [src]="product.image"
-          alt="{{ product.name }}"
-      /></a>
-    </div>
-    <div class="carousel-caption">
-      <h3>{{ product.name }}</h3>
-      <p>{{ product.description }}</p>
-    </div>
-  </ng-template>
-</ngb-carousel>
-<div class="product-list-wrapper">
-  <h1>Trendy Products</h1>
-  <div class="row g-4">
-    <div class="col-lg-3 col-md-6 col-6" *ngFor="let product of trendyProducts">
-      <div class="product-item h-100">
-        <img src="{{ product.image }}" alt="" />
-        <div class="product-details">
-          <h6 class="name-head">{{ product.name }}</h6>
-          <div class="product-price">
-            <h6>Price:{{ product.price }}</h6>
-          </div>
-          <div class="product-color">
-            <h6>Color:{{ product.color }}</h6>
-          </div>
-        </div>
-        <div class="product-footer">
-          <a routerLink="/details/{{ product.id }}">View Details</a>
+<div class="loader-wrapper" *ngIf="loading">
+  <span class="loader"></span>
+</div>
 
-          <a (click)="addToCart(product)">Add to Cart</a>
+<ng-container *ngIf="!loading">
+  @if (popularProducts) {
+  <ngb-carousel>
+    <ng-template
+      class="template"
+      *ngFor="let product of popularProducts"
+      ngbSlide
+    >
+      <div class="picsum-img-wrapper">
+        <a routerLink="/details/{{ product.id }}">
+          <img
+            class="product-image"
+            [src]="product.image"
+            alt="{{ product.name }}"
+        /></a>
+      </div>
+      <div class="carousel-caption">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+  <div class="product-list-wrapper">
+    <h1>Trendy Products</h1>
+    <div class="row g-4">
+      <div
+        class="col-lg-3 col-md-6 col-6"
+        *ngFor="let product of trendyProducts"
+      >
+        <div class="product-item h-100">
+          <img src="{{ product.image }}" alt="" />
+          <div class="product-details">
+            <h6 class="name-head">{{ product.name }}</h6>
+            <div class="product-price">
+              <h6>Price:{{ product.price }}</h6>
+            </div>
+            <div class="product-color">
+              <h6>Color:{{ product.color }}</h6>
+            </div>
+          </div>
+          <div class="product-footer">
+            <a routerLink="/details/{{ product.id }}">View Details</a>
+
+            <a (click)="addToCart(product)">Add to Cart</a>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-}
+  }
+</ng-container>
