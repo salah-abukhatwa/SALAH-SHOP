@@ -71,7 +71,14 @@
       "id": "9egBiA0"
     }
   ],
-  "users": [],
+  "users": [
+    {
+      "name": "momo",
+      "email": "momo@gmail.com",
+      "password": "123456",
+      "id": 1
+    }
+  ],
   "cart": [],
   "orders": []
 }
