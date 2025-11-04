@@ -5,20 +5,16 @@
 
   <div class="nav-search" *ngIf="menuType === 'default' || menuType === 'user'">
     <input
-      #searchInput
+      #searchInputRef
       type="text"
-      placeholder="search Products"
+      placeholder="Search products..."
       (keyup)="searchProducts($event)"
     />
-    <button (click)="submitSearch(searchInputRef.nativeElement.value)">
-      Search
-    </button>
-    <ul class="search-results" *ngIf="searchResult">
-      <li
-        *ngFor="let product of searchResult"
-        (click)="searchResult = []; searchInputRef.nativeElement.value = ''"
-      >
-        <a routerLink="/details/{{ product.id }}">{{ product.name }}</a>
+    <button (click)="submitSearch(searchInputRef.value)">Search</button>
+
+    <ul class="search-results" *ngIf="searchResult?.length">
+      <li *ngFor="let product of searchResult" (click)="clearSearch()">
+        <a [routerLink]="'/details/' + product.id">{{ product.name }}</a>
       </li>
     </ul>
   </div>
@@ -28,7 +24,7 @@
       <ul>
         <li><a routerLink="user-auth">Login</a></li>
         <li><a routerLink="seller-auth">Seller</a></li>
-        <li><a routerLink="">Home</a></li>
+        <li><a routerLink="/">Home</a></li>
         <li>
           <a routerLink="cart" class="cart-link">
             <i class="fa-solid fa-cart-shopping"></i>
@@ -45,7 +41,7 @@
             <i class="fa-solid fa-user"></i> {{ userName | titlecase }}
           </a>
         </li>
-        <li><a routerLink="">Home</a></li>
+        <li><a routerLink="/">Home</a></li>
         <li><a routerLink="orders">Orders</a></li>
         <li>
           <a routerLink="cart" class="cart-link">
@@ -53,7 +49,6 @@
             <span class="cart-badge" *ngIf="cartItem > 0">{{ cartItem }}</span>
           </a>
         </li>
-
         <li><a (click)="userLogout()">Logout</a></li>
       </ul>
     </ng-container>
@@ -61,14 +56,13 @@
     <ng-container *ngSwitchCase="'seller'">
       <ul>
         <li>
-          <a class="sellerName">
+          <a class="username-link">
             <i class="fa-solid fa-user"></i> {{ sellerName | titlecase }}
           </a>
         </li>
         <li><a routerLink="seller-add-product">Products</a></li>
         <li><a routerLink="seller-home">List</a></li>
         <li><a (click)="logout()">Logout</a></li>
-        <!-- <li><a routerLink="seller-dashboard">Dashboard</a></li> -->
       </ul>
     </ng-container>
   </div>
@@ -76,20 +70,16 @@
   <div class="hamburger" (click)="toggleSidenav()">☰</div>
 </nav>
 
-<!-- Side Navigation (Mobile) -->
-<div class="sidenav" [class.open]="isSidenavOpen">
+<!-- Side navigation for mobile -->
+<div class="sidenav" [class.open]="isSidenavOpen" #sidenav>
   <button class="closebtn" (click)="toggleSidenav()">✕</button>
-
   <ul [ngSwitch]="menuType">
     <ng-container *ngSwitchCase="'default'">
-      <li>
-        <a routerLink="user-auth" (click)="toggleSidenav()">Login</a>
-      </li>
+      <li><a routerLink="user-auth" (click)="toggleSidenav()">Login</a></li>
       <li><a routerLink="seller-auth" (click)="toggleSidenav()">Seller</a></li>
-      <li><a routerLink="" (click)="toggleSidenav()">Home</a></li>
-
+      <li><a routerLink="/" (click)="toggleSidenav()">Home</a></li>
       <li>
-        <a routerLink="cart" class="cart-link">
+        <a routerLink="cart" class="cart-link" (click)="toggleSidenav()">
           <i class="fa-solid fa-cart-shopping"></i>
           <span class="cart-badge" *ngIf="cartItem > 0">{{ cartItem }}</span>
         </a>
@@ -98,31 +88,27 @@
 
     <ng-container *ngSwitchCase="'user'">
       <li>
-        <a (click)="toggleSidenav()" class="username-link">
-          <i class="fa-solid fa-user"></i> {{ userName | titlecase }}
-        </a>
+        <a class="username-link"
+          ><i class="fa-solid fa-user"></i> {{ userName | titlecase }}</a
+        >
       </li>
-      <li><a routerLink="" (click)="toggleSidenav()">Home</a></li>
+      <li><a routerLink="/" (click)="toggleSidenav()">Home</a></li>
       <li><a routerLink="orders" (click)="toggleSidenav()">Orders</a></li>
       <li>
-        <a routerLink="cart" class="cart-link">
+        <a routerLink="cart" class="cart-link" (click)="toggleSidenav()">
           <i class="fa-solid fa-cart-shopping"></i>
           <span class="cart-badge" *ngIf="cartItem > 0">{{ cartItem }}</span>
         </a>
       </li>
-
       <li><a (click)="userLogout(); toggleSidenav()">Logout</a></li>
     </ng-container>
 
     <ng-container *ngSwitchCase="'seller'">
       <li>
-        <a (click)="toggleSidenav()" class="username-link">
-          <i class="fa-solid fa-user"></i> {{ sellerName | titlecase }}
-        </a>
+        <a class="username-link"
+          ><i class="fa-solid fa-user"></i> {{ sellerName | titlecase }}</a
+        >
       </li>
-      <!-- <li>
-        <a routerLink="seller-dashboard" (click)="toggleSidenav()">Dashboard</a>
-      </li> -->
       <li>
         <a routerLink="seller-add-product" (click)="toggleSidenav()"
           >Products</a
@@ -133,6 +119,7 @@
     </ng-container>
   </ul>
 </div>
+
 <div
   class="sidenav-overlay"
   [class.active]="isSidenavOpen"

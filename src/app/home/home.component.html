@@ -3,7 +3,7 @@
 </div>
 
 <ng-container *ngIf="!loading">
-  @if (popularProducts) {
+  @if (popularProducts.length > 0) {
   <ngb-carousel>
     <ng-template
       class="template"
@@ -11,12 +11,13 @@
       ngbSlide
     >
       <div class="picsum-img-wrapper">
-        <a routerLink="/details/{{ product.id }}">
+        <a [routerLink]="['/details', product.id]">
           <img
             class="product-image"
             [src]="product.image"
             alt="{{ product.name }}"
-        /></a>
+          />
+        </a>
       </div>
       <div class="carousel-caption">
         <h3>{{ product.name }}</h3>
@@ -24,6 +25,8 @@
       </div>
     </ng-template>
   </ngb-carousel>
+  }
+
   <div class="product-list-wrapper">
     <h1>Trendy Products</h1>
     <div class="row g-4">
@@ -32,25 +35,22 @@
         *ngFor="let product of trendyProducts"
       >
         <div class="product-item h-100">
-          <img src="{{ product.image }}" alt="" />
+          <img [src]="product.image" alt="{{ product.name }}" />
           <div class="product-details">
             <h6 class="name-head">{{ product.name }}</h6>
             <div class="product-price">
-              <h6>Price:{{ product.price }}</h6>
+              <h6>Price: {{ product.price }}</h6>
             </div>
             <div class="product-color">
-              <h6>Color:{{ product.color }}</h6>
+              <h6>Color: {{ product.color }}</h6>
             </div>
           </div>
           <div class="product-footer">
-            <a routerLink="/details/{{ product.id }}">View Details</a>
-
+            <a [routerLink]="['/details', product.id]">View Details</a>
             <a (click)="addToCart(product)">Add to Cart</a>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  }
 </ng-container>

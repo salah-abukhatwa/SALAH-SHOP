@@ -16,9 +16,7 @@
             <ng-container *ngIf="item.product?.discount; else noDiscount">
               <s class="original-price">{{ item.product?.price }} $</s>
               <b class="discount-price">
-                {{
-                  (item.product?.price ?? 0) - (item.product?.discount ?? 0)
-                }}
+                {{ (item.product?.price ?? 0) - (item.product?.discount ?? 0) }}
                 $
               </b>
             </ng-container>

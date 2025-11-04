@@ -6,13 +6,13 @@
       <div class="delivery-options">
         <button
           [class.active]="deliveryOption === 'delivery'"
-          (click)="deliveryOption = 'delivery'"
+          (click)="setDeliveryOption('delivery')"
         >
           🚚 Delivery
         </button>
         <button
           [class.active]="deliveryOption === 'pickup'"
-          (click)="deliveryOption = 'pickup'"
+          (click)="setDeliveryOption('pickup')"
         >
           📍 Pick-Up
         </button>

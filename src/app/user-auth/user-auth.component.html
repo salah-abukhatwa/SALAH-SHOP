@@ -1,5 +1,4 @@
 <div class="user-auth">
-  <!-- Sign Up Form -->
   <div *ngIf="!showLogin" class="sign-up">
     <h1>User Sign Up</h1>
     <form
@@ -7,7 +6,6 @@
       (ngSubmit)="signUp(userSignUp.value)"
       class="common-form"
     >
-      <!-- Name -->
       <div class="form-group">
         <input
           type="text"
@@ -25,7 +23,6 @@
         </p>
       </div>
 
-      <!-- Email -->
       <div class="form-group">
         <input
           type="email"
@@ -41,7 +38,6 @@
         </p>
       </div>
 
-      <!-- Password -->
       <div class="form-group">
         <input
           type="password"
@@ -59,18 +55,15 @@
         </p>
       </div>
 
-      <!-- Submit Button -->
       <button type="submit" [disabled]="userSignUp.invalid" class="form-button">
         Sign Up
       </button>
-
       <p class="auth-toggle-link">
         Already have an account? <a (click)="openLogin()">Click Here</a>
       </p>
     </form>
   </div>
 
-  <!-- Login Form -->
   <div *ngIf="showLogin" class="login">
     <h1>User Login</h1>
     <form
@@ -78,10 +71,7 @@
       (ngSubmit)="login(userLogin.value)"
       class="common-form"
     >
-      <!-- Error message from backend -->
       <p class="error-p" *ngIf="authError">{{ authError }}</p>
-
-      <!-- Email -->
       <div class="form-group">
         <input
           type="email"
@@ -100,7 +90,6 @@
         </p>
       </div>
 
-      <!-- Password -->
       <div class="form-group">
         <input
           type="password"
@@ -121,12 +110,9 @@
         </p>
       </div>
 
-      <!-- Submit Button -->
       <button type="submit" [disabled]="userLogin.invalid" class="form-button">
         Login
       </button>
-
-      <!-- Toggle Link -->
       <p class="auth-toggle-link">
         Want to Create Account? <a (click)="openSignUp()">Click Here</a>
       </p>

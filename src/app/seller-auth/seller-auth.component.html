@@ -8,7 +8,6 @@
       method="POST"
       action="#"
     >
-      <!-- Name -->
       <div class="form-group">
         <input
           type="text"
@@ -26,7 +25,6 @@
         </p>
       </div>
 
-      <!-- Email -->
       <div class="form-group">
         <input
           type="email"
@@ -42,7 +40,6 @@
         </p>
       </div>
 
-      <!-- Password -->
       <div class="form-group">
         <input
           type="password"
@@ -67,12 +64,12 @@
       >
         Sign Up
       </button>
-
       <p class="auth-toogle-link" (click)="openLogin()">
         Already have an account? Login
       </p>
     </form>
   </div>
+
   <div *ngIf="showLogin" class="login">
     <h1>Seller Login</h1>
     <form
@@ -98,7 +95,6 @@
         required
         ngModel
       />
-
       <button
         type="submit"
         [disabled]="sellerLogin.invalid"
@@ -109,7 +105,6 @@
       <p
         style="cursor: pointer"
         class="auth-toogle-link"
-        st
         (click)="openSignUp()"
       >
         Don't have an account? Sign Up

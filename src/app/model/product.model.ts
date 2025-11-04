@@ -1,28 +1,35 @@
 export interface Product {
-  id: number;
+  id: string;
   name: string;
   price: number;
   color: string;
   category: string;
   image: string;
   description: string;
-  quantity?: number;
   discount?: number;
+  isPopular?: boolean;
+  isTrendy?: boolean;
+  isAvailable?: boolean;
+  isPrime?: boolean;
+  sellerId?: string;
 }
 
 export interface Cart {
-  id?: number;
-  productId: number;
-  userId: number;
+  id?: string;
+  productId: string;
+  userId: string;
   quantity: number;
-
-  product?: Product;
+  name?: string;
+  price?: number;
+  image?: string;
 }
-export interface order {
+
+export interface Order {
   email: string;
   address: string;
   contact: string;
   totalPrice: number;
-  userId: number;
-  id?: number;
+  userId: string;
+  id?: string;
+  items?: Cart[];
 }

@@ -1,65 +1,97 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../services/product.service';
-import { Cart, Product } from '../model/product.model';
-import { CommonModule } from '@angular/common';
-import { forkJoin } from 'rxjs';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { forkJoin, of } from 'rxjs';
+import { Cart, Product } from '../model/product.model';
+import { CartService } from '../services/cart.service';
+import { ProductService } from '../services/product.service';
+import { catchError } from 'rxjs/operators';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-cart-page',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './cart-page.component.html',
-  styleUrl: './cart-page.component.css',
+  styleUrls: ['./cart-page.component.css'],
 })
 export class CartPageComponent implements OnInit {
   cartItems: (Cart & { product?: Product })[] = [];
-  totalPrice: number = 0; // subtotal
-  tax: number = 0;
-  discount: number = 0;
-  delivery: number = 20; // fixed delivery fee
-  finalTotal: number = 0;
+  totalPrice = 0;
+  tax = 0;
+  discount = 0;
+  delivery = 20;
+  finalTotal = 0;
 
-  constructor(private productService: ProductService, private router: Router) {}
+  constructor(
+    private cartService: CartService,
+    private productService: ProductService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadCart();
   }
 
   loadCart(): void {
-    this.productService.getCartItems().subscribe((items) => {
-      if (items.length && 'price' in items[0]) {
-        this.cartItems = items as any;
-        this.calculateTotal();
-      } else {
-        const cartItems = items as Cart[];
-        if (!cartItems.length) {
+    const userStore = localStorage.getItem('user');
+    const userId = userStore ? JSON.parse(userStore).id : null;
+
+    if (userId) {
+      this.cartService.getCart(userId).subscribe((items) => {
+        if (!items.length) {
           this.cartItems = [];
           this.resetSummary();
           this.router.navigate(['/']);
           return;
         }
 
-        const productRequests = cartItems.map((item) =>
-          this.productService.getProduct(item.productId.toString())
+        const requests = items.map((item) =>
+          this.productService
+            .getProduct(item.productId)
+            .pipe(catchError(() => of(null)))
         );
 
-        forkJoin(productRequests).subscribe((products) => {
-          this.cartItems = cartItems.map((cart, index) => ({
-            ...cart,
-            product: products[index],
-          }));
+        combineLatest(requests).subscribe((products) => {
+          this.cartItems = items
+            .map((item, i) => {
+              const product = products[i];
+              if (!product) {
+                console.warn(
+                  'Product not found for cart item:',
+                  item.productId
+                );
+                return null;
+              }
+              return { ...item, product };
+            })
+            .filter(
+              (item): item is Cart & { product: Product } => item !== null
+            );
           this.calculateTotal();
         });
-      }
-      if (items.length === 0) {
-        this.router.navigate(['/']);
-      }
-    });
+      });
+    } else {
+      const localCart = JSON.parse(localStorage.getItem('cart') || '[]');
+      this.cartItems = localCart.map((item: any) => ({
+        ...item,
+        product: {
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          image: item.image,
+          color: item.color || '',
+          category: item.category || '',
+          description: item.description || '',
+          discount: item.discount ?? 0,
+        } as Product,
+      }));
+      this.calculateTotal();
+    }
   }
 
   calculateTotal(): void {
-    const totals = this.productService.calculateCartTotals(this.cartItems);
+    const totals = this.cartService.calculateCartTotals(this.cartItems);
     this.totalPrice = totals.total;
 
     // new fields if you want to show in cart
@@ -76,18 +108,14 @@ export class CartPageComponent implements OnInit {
     this.finalTotal = 0;
   }
 
-  removeFromCart(cartId: number): void {
-    let user: string | null = null;
+  removeFromCart(cartId: string): void {
+    const userStore = localStorage.getItem('user');
+    const userId = userStore ? JSON.parse(userStore).id : null;
 
-    if (typeof localStorage !== 'undefined') {
-      user = localStorage.getItem('user');
-    }
-    if (user) {
-      this.productService.deleteCartItem(cartId).subscribe(() => {
-        this.loadCart();
-      });
+    if (userId) {
+      this.cartService.deleteCartItem(cartId).subscribe(() => this.loadCart());
     } else {
-      this.productService.localRemoveFromCart(cartId);
+      this.cartService.removeLocalCartItem(cartId);
       this.loadCart();
     }
   }

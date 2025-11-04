@@ -53,7 +53,7 @@ export class SellerUpdateProductComponent implements OnInit {
             () => (
               (this.productMessage = ''), this.router.navigate(['seller-home'])
             ),
-            2000
+            1000
           );
         });
     } else {

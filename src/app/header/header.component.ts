@@ -1,151 +1,112 @@
-import { CommonModule } from '@angular/common';
 import {
   Component,
-  ElementRef,
-  HostListener,
+  Inject,
   OnInit,
+  PLATFORM_ID,
+  ElementRef,
   ViewChild,
 } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ProductService } from '../services/product.service';
-import { Cart, Product } from '../model/product.model';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { CartService } from '../services/cart.service';
+import { Product } from '../model/product.model';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, FormsModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
   menuType: 'default' | 'seller' | 'user' = 'default';
-  sellerName = '';
   userName = '';
-  searchResult: Product[] = [];
+  sellerName = '';
   cartItem = 0;
-
+  searchResult: Product[] = [];
+  isBrowser = false;
   isSidenavOpen = false;
 
-  @ViewChild('searchInput') searchInputRef!: ElementRef;
-  @ViewChild('sidenav') sidenavRef!: ElementRef;
+  @ViewChild('searchInputRef') searchInputRef!: ElementRef;
 
-  constructor(private router: Router, private productService: ProductService) {}
+  constructor(
+    private router: Router,
+    private productService: ProductService,
+    private cartService: CartService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
 
   ngOnInit(): void {
-    this.router.events.subscribe((val: any) => {
-      this.updateMenuAndCart();
+    this.cartService.cartData.subscribe(
+      (cart) => (this.cartItem = cart.length)
+    );
+
+    this.router.events.subscribe(() => {
+      this.updateHeaderData();
       this.searchResult = [];
-      if (this.searchInputRef) {
-        this.searchInputRef.nativeElement.value = '';
-      }
     });
 
-    this.updateMenuAndCart();
-
-    this.productService.cartData.subscribe((cart: Cart[]) => {
-      this.cartItem = cart.length;
-    });
+    this.updateHeaderData();
   }
 
-  private updateMenuAndCart() {
-    if (typeof localStorage !== 'undefined') {
-      const sellerStore = localStorage.getItem('seller');
-      const userStore = localStorage.getItem('user');
+  updateHeaderData() {
+    if (!this.isBrowser) return;
 
-      if (sellerStore && this.router.url.includes('seller')) {
-        const sellerData = JSON.parse(sellerStore);
-        this.sellerName = sellerData?.name || '';
-        this.menuType = 'seller';
-      } else if (userStore) {
-        const userData = JSON.parse(userStore);
-        this.userName = userData?.name || '';
-        this.menuType = 'user';
+    const userData = JSON.parse(localStorage.getItem('user') || 'null');
+    const sellerData = JSON.parse(localStorage.getItem('seller') || 'null');
 
-        if (userData?.id) {
-          this.productService.updateCartCountFromRemote(userData.id);
-        }
-      } else {
-        this.menuType = 'default';
-        this.productService.initializeCartFromLocalStorage();
-      }
+    if (sellerData?.id) {
+      this.menuType = 'seller';
+      this.sellerName = sellerData.name;
+    } else if (userData?.id) {
+      this.menuType = 'user';
+      this.userName = userData.name;
+      this.cartService.updateCart(userData.id);
     } else {
       this.menuType = 'default';
+      this.cartService.loadLocalCart();
     }
-  }
-
-  logout() {
-    if (typeof localStorage !== 'undefined') {
-      localStorage.removeItem('seller');
-    }
-    this.router.navigate(['/']);
-    this.menuType = 'default';
   }
 
   userLogout() {
-    if (typeof localStorage !== 'undefined') {
-      localStorage.removeItem('user');
-    }
-    this.router.navigate(['/']);
+    localStorage.removeItem('user');
     this.menuType = 'default';
+    this.cartService.loadLocalCart();
+    this.router.navigate(['/']);
   }
 
-  searchProducts(event: KeyboardEvent): void {
-    const element = event.target as HTMLInputElement;
-    const query = element.value;
-    if (query.length > 2) {
-      this.productService
-        .searchProducts(query)
-        .pipe(debounceTime(300), distinctUntilChanged())
-        .subscribe((result) => {
-          this.searchResult = result;
-        });
-    } else {
-      this.searchResult = [];
-    }
-  }
-
-  submitSearch(searchValue: string): void {
-    if (searchValue) {
-      this.router.navigate([`search/${searchValue}`]);
-      this.searchResult = [];
-      if (this.searchInputRef) {
-        this.searchInputRef.nativeElement.value = '';
-      }
-    }
-  }
-
-  @HostListener('document:click', ['$event'])
-  onClickOutside(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-
-    // --- Sidenav logic ---
-    const clickedInsideSidenav =
-      this.sidenavRef?.nativeElement.contains(target);
-    const clickedHamburger = target.classList.contains('hamburger');
-
-    if (!clickedInsideSidenav && !clickedHamburger) {
-      this.isSidenavOpen = false;
-    }
-
-    const clickedInsideSearch =
-      this.searchInputRef?.nativeElement.contains(target) ||
-      target.closest('.search-results');
-
-    if (!clickedInsideSearch) {
-      this.searchResult = [];
-      if (this.searchInputRef) {
-        this.searchInputRef.nativeElement.value = '';
-      }
-    }
+  logout() {
+    localStorage.removeItem('seller');
+    this.menuType = 'default';
+    this.router.navigate(['/']);
   }
 
   toggleSidenav() {
     this.isSidenavOpen = !this.isSidenavOpen;
+  }
 
-    const hamburger = document.querySelector('.hamburger');
-    if (hamburger) {
-      hamburger.classList.toggle('active', this.isSidenavOpen);
+  searchProducts(event: any) {
+    const query = event.target.value;
+    if (query.length > 2) {
+      this.productService.searchProducts(query).subscribe((res) => {
+        this.searchResult = res;
+      });
+    } else this.searchResult = [];
+  }
+
+  clearSearch() {
+    this.searchResult = [];
+    if (this.searchInputRef) this.searchInputRef.nativeElement.value = '';
+  }
+
+  submitSearch(query: string): void {
+    if (query.trim()) {
+      this.router.navigate([`/search/${query.trim()}`]);
+      this.clearSearch();
     }
   }
 }

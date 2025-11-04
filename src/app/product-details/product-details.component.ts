@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ProductService } from '../services/product.service';
+import { CartService } from '../services/cart.service';
 import { Cart, Product } from '../model/product.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -14,85 +15,92 @@ import { FormsModule } from '@angular/forms';
 })
 export class ProductDetailsComponent implements OnInit {
   productData: Product | null = null;
-  productQuantity: number = 1;
-  removeProduct: boolean = false;
+  productQuantity = 1;
+  removeProduct = false;
   isGuestUser = true;
   loading = true;
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
-    // Safe access to localStorage
-    if (typeof localStorage !== 'undefined') {
-      this.isGuestUser = !localStorage.getItem('user');
-    }
-
+    this.isGuestUser = !localStorage.getItem('user');
     const productId = this.route.snapshot.paramMap.get('id');
-
     if (productId) {
-      this.productService.getProduct(productId).subscribe((data: Product) => {
+      this.productService.getProduct(productId).subscribe((data) => {
         this.productData = data;
         this.loading = false;
-
-        if (typeof localStorage !== 'undefined') {
+        if (this.isGuestUser) {
           const cart = JSON.parse(localStorage.getItem('cart') || '[]');
           this.removeProduct = cart.some(
-            (item: Product) => item.id === this.productData?.id
+            (item: any) => item.id === this.productData?.id
           );
+        } else {
+          const user = localStorage.getItem('user');
+          const userId = user ? JSON.parse(user)?.id : null;
+          if (userId) {
+            this.cartService.getCart(userId).subscribe((cart) => {
+              this.removeProduct = cart.some(
+                (item) => item.productId === this.productData?.id
+              );
+            });
+          }
         }
       });
     }
   }
 
   handleQuantity(value: string): void {
-    if (this.productQuantity < 20 && value === 'plus') {
-      this.productQuantity += 1;
-    } else if (this.productQuantity > 1 && value === 'minus') {
-      this.productQuantity -= 1;
-    }
+    if (value === 'plus' && this.productQuantity < 20) this.productQuantity++;
+    if (value === 'minus' && this.productQuantity > 1) this.productQuantity--;
   }
 
-  addToCart() {
+  addToCart(): void {
     if (!this.productData) return;
-
-    if (typeof localStorage === 'undefined' || this.isGuestUser) {
-      // Guest user: use localStorage cart
+    if (this.isGuestUser) {
       const productToAdd = {
         ...this.productData,
         quantity: this.productQuantity,
       };
-      this.productService.localAddToCart(productToAdd);
+      this.cartService.addToLocalCart(productToAdd);
       this.removeProduct = true;
-    } else {
-      // Logged-in user: save to remote cart
-      let user: string | null = null;
-
-      if (typeof localStorage !== 'undefined') {
-        user = localStorage.getItem('user');
-      }
-      const userId = user && JSON.parse(user)?.id;
-
-      if (userId) {
-        const productToAdd: Cart = {
-          productId: this.productData.id,
-          userId: userId,
-          quantity: this.productQuantity,
-        };
-
-        this.productService.addToCart(productToAdd).subscribe(() => {
-          this.removeProduct = true;
-        });
-      }
+      return;
+    }
+    const user = localStorage.getItem('user');
+    const userId = user ? JSON.parse(user)?.id : null;
+    if (userId) {
+      const cartItem: Cart = {
+        productId: this.productData.id!,
+        userId: userId as string,
+        quantity: this.productQuantity,
+      };
+      this.cartService.addToCart(cartItem).subscribe(() => {
+        this.removeProduct = true;
+      });
     }
   }
 
   removeFromCart(): void {
-    if (typeof localStorage !== 'undefined' && this.productData) {
-      this.productService.localRemoveFromCart(this.productData.id);
+    if (!this.productData) return;
+    if (this.isGuestUser) {
+      this.cartService.removeLocalCartItem(this.productData.id!);
       this.removeProduct = false;
+      return;
+    }
+    const user = localStorage.getItem('user');
+    const userId = user ? JSON.parse(user)?.id : null;
+    if (userId) {
+      this.cartService.getCart(userId).subscribe((cart) => {
+        const item = cart.find((c) => c.productId === this.productData?.id);
+        if (item?.id) {
+          this.cartService.deleteCartItem(item.id).subscribe(() => {
+            this.removeProduct = false;
+          });
+        }
+      });
     }
   }
 }
